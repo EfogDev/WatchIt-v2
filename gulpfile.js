@@ -17,7 +17,7 @@ gulp.task('package', ['clean'], () => {
 
 gulp.task('css', ['clean'], () => {
     return gulp.src('./src/css/**/*')
-        .pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./build/css'));
 });
 
 gulp.task('js', ['clean'], () => {
@@ -43,7 +43,7 @@ gulp.task('inject', ['clean', 'package', 'css', 'js', 'html', 'bower'], () => {
             './build/js/services/**/*',
             './build/js/controllers/**/*',
             //styles
-            './build/css/'
+            './build/css/**/*'
         ])))
         //electronize
         .pipe(replace(/<script src="..\/(.*?)"><\/script>/gim, (match, path) => {
