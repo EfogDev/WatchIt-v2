@@ -52,6 +52,9 @@ gulp.task('inject', ['clean', 'package', 'css', 'js', 'html', 'bower'], () => {
         .pipe(replace(/<script src="\/build\/(.*?)"><\/script>/gim, (match, path) => {
             return `<script>require("./${path}");</script>`;
         }))
+        .pipe(replace(/<link rel="stylesheet" href="\/build\/(.*?)"/gim, (match, path) => {
+            return `<link rel="stylesheet" href="./${path}"`;
+        }))
         .pipe(gulp.dest('./build'));
 });
 
