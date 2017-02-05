@@ -1,22 +1,19 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "watchit",
+  "version": "2.0.0",
+  "description": "Simple GUI client to watch serials",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "node ./node_modules/gulp/bin/gulp.js build && electron ./build/"
   },
   "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
+  "author": "Efog <efog@yandex.com>",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^1.4.1"
+    "electron": "^1.4.1",
+    "gulp-browserify": "^0.5.1",
+    "gulp-inject": "^4.2.0",
+    "gulp-rm": "^1.0.2",
+    "gulp-wiredep": "^1.1.3"
   }
 }
