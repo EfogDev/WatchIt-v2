@@ -1,12 +1,18 @@
 const gulp = require('gulp');
 const wiredep = require('wiredep').stream;
-const rm = require('gulp-rm');
+const clean = require('gulp-clean');
 const browserify = require('gulp-browserify');
+const replace = require('gulp-replace');
 const inject = require('gulp-inject');
 
 gulp.task('clean', () => {
     return gulp.src('./build', {read: false})
-        .pipe(rm())
+        .pipe(clean({force: true}))
+});
+
+gulp.task('package', ['clean'], () => {
+    return gulp.src('./package.json')
+        .pipe(gulp.dest('./build'));
 });
 
 gulp.task('css', ['clean'], () => {
@@ -21,19 +27,38 @@ gulp.task('js', ['clean'], () => {
 
 gulp.task('html', ['clean'], () => {
     return gulp.src('./src/views/**/*.html')
-        .pipe(gulp.dest('./build'));
+        .pipe(gulp.dest('./build/views'));
 });
 
-gulp.task('inject', ['clean', 'css', 'js', 'html'], () => {
+gulp.task('bower', ['clean'], () => {
+    return gulp.src('./bower_components/**/*')
+        .pipe(gulp.dest('./build/bower_components'));
+});
+
+gulp.task('inject', ['clean', 'package', 'css', 'js', 'html', 'bower'], () => {
     return gulp.src('./src/index.html')
         .pipe(wiredep())
         .pipe(inject(gulp.src([
-            './src/js/app.js',
-            './src/js/services/**/*',
-            './src/js/controllers/**/*',
+            './build/js/app.js',
+            './build/js/services/**/*',
+            './build/js/controllers/**/*',
+            //styles
+            './build/css/'
         ])))
+        //electronize
+        .pipe(replace(/<script src="..\/(.*?)"><\/script>/gim, (match, path) => {
+            return `<script>require("./${path}");</script>`;
+        }))
+        .pipe(replace(/<script src="\/build\/(.*?)"><\/script>/gim, (match, path) => {
+            return `<script>require("./${path}");</script>`;
+        }))
         .pipe(gulp.dest('./build'));
 });
 
-
 gulp.task('build', ['inject']);
+
+gulp.task('watch', ['build'], () => {
+    return gulp.watch('./src/**/*', ['build']);
+});
+
+gulp.task('default', ['watch']);
