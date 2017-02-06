@@ -16,6 +16,10 @@
   ],
   "dependencies": {
     "angular": "~1.4",
-    "angular-ui-router": "^0.4.2"
+    "angular-ui-router": "^0.4.2",
+    "ngstorage": "^0.3.11",
+    "lodash": "^4.17.4",
+    "font-awesome": "^4.7.0",
+    "jquery": "~1.8"
   }
 }

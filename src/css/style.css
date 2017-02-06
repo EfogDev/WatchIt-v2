@@ -1,0 +1,94 @@
+@font-face {
+    font-family: "Trebuchet MS";
+    src: url(../fonts/trebuchet_ms.ttf);
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Trebuchet MS";
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+.home {
+    display: flex;
+    flex-direction: row;
+}
+
+.left-panel {
+    background: #f6f6f6;
+    flex: 0 1 300px;
+    border-right: 1px solid #e3e3e3;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+.content {
+    flex: 1 1 auto;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    border: 1px solid #ccc;
+    background: #fff;
+}
+
+.search-icon {
+    padding: 7px;
+}
+
+.search input {
+    padding: 6px 6px 6px 0;
+    width: 100%;
+    font-size: 16px;
+    border: none;
+    outline: none;
+}
+
+.subtitle {
+    padding: 0 20px 0 20px;
+}
+
+.list-container {
+    /*padding-top: 20px;*/
+}
+
+.serial {
+    padding: 10px 20px;
+    background: #eee;
+}
+
+.serial:hover {
+    cursor: pointer;
+    background: #c3c7de;
+}
+
+.serial-item {
+    display: flex;
+    flex-direction: row;
+}
+
+.poster {
+    flex: 0 0 80px;
+}
+
+.poster img {
+    width: 100%;
+}
+
+.serial-container {
+    margin-left: 10px;
+}
+
+.serial-name {
+    font-weight: bold;
+}
+
+.serial-info {
+    color: gray;
+}

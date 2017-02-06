@@ -26,7 +26,10 @@ function createWindow() {
         mainWindow.webContents.openDevTools();
 }
 
-app.on('ready', createWindow);
+app.on('ready', () => {
+    createWindow();
+    require('./functions');
+});
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {

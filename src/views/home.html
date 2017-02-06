@@ -1,1 +1,41 @@
-Hello world!
+<div class="home">
+    <div class="left-panel">
+        <div class="search">
+            <span class="search-icon fa fa-search"></span>
+            <input type="text" ng-model="search.text" />
+        </div>
+
+        <div class="serials-list">
+            <div class="loading" ng-if="search.loading">
+                <div class="cssload-loader">
+                    <div class="cssload-inner cssload-one"></div>
+                    <div class="cssload-inner cssload-two"></div>
+                    <div class="cssload-inner cssload-three"></div>
+                </div>
+            </div>
+
+            <div class="subtitle" ng-if="!search.text && !serials.length">
+                <span>У вас еще нет сериалов, попробуйте что-нибудь поискать.</span>
+            </div>
+
+            <div class="subtitle" ng-if="search.text.length > 3 && !search.loading">
+                <!--<span ng-if="search.results.length">Результаты поиска:</span>-->
+                <span ng-if="!search.results.length">Ни одного сериала не найдено. Убедитесь, что вы правильно ввели название.</span>
+            </div>
+
+            <div class="list-container" ng-if="!search.loading">
+                <div class="serial" ng-repeat="serial in serials track by $index" ng-if="!search.text">
+                    <serial-item data="serial"></serial-item>
+                </div>
+
+                <div class="serial" ng-repeat="serial in search.results track by $index">
+                    <serial-item data="serial"></serial-item>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+
+    </div>
+</div>
