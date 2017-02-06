@@ -1,5 +1,15 @@
 <div class="serial-item">
-    <div class="poster"><img ng-src="{{ data.image }}" /></div>
+    <div class="poster">
+        <img ng-src="{{ data.image }}" ng-show="loaded" />
+        <div ng-if="!loaded">
+            <div class="cssload-loader poster-loader">
+                <div class="cssload-inner cssload-one"></div>
+                <div class="cssload-inner cssload-two"></div>
+                <div class="cssload-inner cssload-three"></div>
+            </div>
+        </div>
+    </div>
+
     <div class="serial-container">
         <div class="serial-name">{{ data.name }}</div>
         <div class="serial-info">{{ data.info }}</div>

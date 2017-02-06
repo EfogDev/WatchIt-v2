@@ -10,6 +10,18 @@ angular.module('watchit')
             return serial;
         };
 
+        let findSerial = (serialLink) => {
+            let serial;
+
+            try {
+                serial = _.find(serials, s => s.link == serialLink);
+            } catch (e) {
+                return null;
+            }
+
+            return serial;
+        };
+
         this.getSerialsList = () => {
             return serials;
         };

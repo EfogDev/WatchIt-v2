@@ -3,13 +3,51 @@ angular.module('watchit')
     .service('API', function ($http) {
         const {ipcRenderer} = require('electron');
 
+        this.loadData = (link) => {
+            return $http.get(link).then(response => {
+                let data = {other: []};
+                let html = response.data;
+                let temp = document.createElement('template');
+                temp.innerHTML = html;
+
+                //poster image
+                let image = temp.content.querySelector('img[itemprop]');
+                data.image = image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : null;
+
+                //voice
+                try {
+                    data.voice = temp.content.querySelector('.poster-video').querySelector('strong').querySelector('span').textContent;
+                } catch (e) {
+                    data.voide = null;
+                }
+
+                //description
+                try {
+                    data.description = temp.content.querySelector('article').textContent;
+                } catch (e) {
+                    data.description = null;
+                }
+
+                let other = temp.content.querySelectorAll('.view-info-title');
+                other.forEach(item => {
+                    data.other.push({
+                        caption: item.textContent,
+                        data: item.nextSibling.textContent
+                    });
+                });
+
+                console.info(data);
+                return data;
+            });
+        };
+
         this.loadImage = (link) => {
             return $http.get(link).then(response => {
                 let html = response.data;
-                let temp = document.createElement('div');
+                let temp = document.createElement('template');
                 temp.innerHTML = html;
 
-                let image = temp.querySelector('.poster-video img');
+                let image = temp.content.querySelector('img[itemprop]');
 
                 if (!image)
                     return '';

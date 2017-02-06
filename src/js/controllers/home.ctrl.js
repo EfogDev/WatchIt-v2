@@ -1,6 +1,6 @@
 angular.module('watchit')
 
-    .controller('HomeCtrl', ($scope, Storage, API) => {
+    .controller('HomeCtrl', ($scope, $state, Storage, API) => {
         $scope.search = {
             loading: false,
             text: '',
@@ -26,5 +26,9 @@ angular.module('watchit')
                 $scope.search.loading = false;
                 $scope.search.results = [];
             }
-        })
+        });
+
+        $scope.goToSerialInfo = (serial) => {
+              $state.go('serial', {link: serial.link});
+        };
     });

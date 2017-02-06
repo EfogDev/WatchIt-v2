@@ -20,5 +20,8 @@
     "gulp-watch": "^4.3.11",
     "gulp-wiredep": "^1.1.3",
     "lodash": "^4.17.4"
+  },
+  "dependencies": {
+    "gulp": "^3.9.1"
   }
 }

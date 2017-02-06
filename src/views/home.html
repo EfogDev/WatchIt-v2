@@ -18,9 +18,12 @@
                 <span>У вас еще нет сериалов, попробуйте что-нибудь поискать.</span>
             </div>
 
-            <div class="subtitle" ng-if="search.text.length > 3 && !search.loading">
-                <!--<span ng-if="search.results.length">Результаты поиска:</span>-->
-                <span ng-if="!search.results.length">Ни одного сериала не найдено. Убедитесь, что вы правильно ввели название.</span>
+            <div class="subtitle" ng-if="search.text.length > 3 && !search.loading && !search.results.length">
+                <span>Ни одного сериала не найдено. Убедитесь, что вы правильно ввели название.</span>
+            </div>
+
+            <div class="subtitle" ng-if="search.text.length && search.text.length < 3">
+                <span>Введите, как минимум, три символа для начала поиска.</span>
             </div>
 
             <div class="list-container" ng-if="!search.loading">
@@ -28,14 +31,13 @@
                     <serial-item data="serial"></serial-item>
                 </div>
 
-                <div class="serial" ng-repeat="serial in search.results track by $index">
+                <div class="serial" ng-click="goToSerialInfo(serial)" ng-repeat="serial in search.results track by $index">
                     <serial-item data="serial"></serial-item>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="content">
-
-    </div>
+    <div class="dummy"></div>
+    <div class="content" ui-view></div>
 </div>
