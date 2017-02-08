@@ -1,34 +1,57 @@
 angular.module('watchit')
 
-    .service('API', function ($http) {
+    .service('API', function ($http, DOM) {
         const {ipcRenderer} = require('electron');
+
+        this.loadEpisodes = (link) => {
+            return new Promise((resolve, reject) => {
+                $http.get(link).then(response => {
+                    let el = DOM(response.data);
+                    let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
+
+                    if (!frame)
+                        throw new Error('Ошибка. Возможно, это не сериал?');
+
+                    return frame.getAttribute('src');
+                }).then(url => {
+                    console.log('Connecting with backend...');
+                    ipcRenderer.send('iframe', {url, link});
+
+                    return new Promise((resolve, reject) => {
+                        ipcRenderer.once('iframe', (event, data) => {
+                            resolve(data);
+                        });
+                    });
+                }).then(data => {
+                    console.log(data);
+                });
+            });
+        };
 
         this.loadData = (link) => {
             return $http.get(link).then(response => {
                 let data = {other: []};
-                let html = response.data;
-                let temp = document.createElement('template');
-                temp.innerHTML = html;
+                let el = DOM(response.data);
 
                 //poster image
-                let image = temp.content.querySelector('img[itemprop]');
+                let image = el.querySelector('img[itemprop]');
                 data.image = image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : null;
 
                 //voice
                 try {
-                    data.voice = temp.content.querySelector('.poster-video').querySelector('strong').querySelector('span').textContent;
+                    data.voice = el.querySelector('.poster-video').querySelector('strong').querySelector('span').textContent;
                 } catch (e) {
                     data.voide = null;
                 }
 
                 //description
                 try {
-                    data.description = temp.content.querySelector('article').textContent;
+                    data.description = el.querySelector('article').textContent;
                 } catch (e) {
                     data.description = null;
                 }
 
-                let other = temp.content.querySelectorAll('.view-info-title');
+                let other = el.querySelectorAll('.view-info-title');
                 other.forEach(item => {
                     data.other.push({
                         caption: item.textContent,
@@ -42,16 +65,10 @@ angular.module('watchit')
 
         this.loadImage = (link) => {
             return $http.get(link).then(response => {
-                let html = response.data;
-                let temp = document.createElement('template');
-                temp.innerHTML = html;
+                let el = DOM(response.data);
+                let image = el.querySelector('img[itemprop]');
 
-                let image = temp.content.querySelector('img[itemprop]');
-
-                if (!image)
-                    return '';
-
-                return `http://zfilm-hd.net/${image.getAttribute('src')}`;
+                return image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : '';
             });
         };
 
@@ -60,7 +77,7 @@ angular.module('watchit')
 
             return new Promise((resolve, reject) => {
                 ipcRenderer.once('found', (event, found) => {
-                    if (typeof found != 'string')
+                    if (typeof found !== 'string')
                         reject();
 
                     let serials = [];

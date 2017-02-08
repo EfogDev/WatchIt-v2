@@ -2,7 +2,7 @@ angular.module('watchit')
 
     .service('Storage', function ($localStorage) {
         let getSerial = (serialLink) => {
-            let serial = _.find(serials, s => s.link == serialLink);
+            let serial = _.find(serials, s => s.link === serialLink);
 
             if (!serial)
                 throw new Error('Serial does not exist.');
@@ -14,7 +14,7 @@ angular.module('watchit')
             let serial;
 
             try {
-                serial = _.find(serials, s => s.link == serialLink);
+                serial = _.find(serials, s => s.link === serialLink);
             } catch (e) {
                 return null;
             }
@@ -27,7 +27,7 @@ angular.module('watchit')
         };
 
         this.addSerial = (link, name, info) => {
-            if (serials.filter(s => s.link == link).length)
+            if (serials.filter(s => s.link === link).length)
                 throw new Error('Serial already exists.');
 
             serials.push({
@@ -43,7 +43,7 @@ angular.module('watchit')
         };
 
         this.removeSerial = (serialLink) => {
-            serials.splice(_.findIndex(serials, s => s.link == serialLink), 1);
+            serials.splice(_.findIndex(serials, s => s.link === serialLink), 1);
         };
 
         this.updateTime = (serialLink, season, episode, time) => {

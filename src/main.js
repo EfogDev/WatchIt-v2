@@ -11,7 +11,7 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         'width': 960,
         'height': 600,
-        'minWidth': (process.env.DEBUG) ? 1450 : 960,
+        'minWidth': (process.env.DEBUG) ? 1366 : 960,
         'minHeight': 600,
     });
 

@@ -1,14 +1,12 @@
 const gulp = require('gulp');
 const wiredep = require('wiredep').stream;
-const clean = require('gulp-clean');
-const browserify = require('gulp-browserify');
 const replace = require('gulp-replace');
 const inject = require('gulp-inject');
 const watch = require('gulp-watch');
+const del = require('del');
 
 gulp.task('clean', () => {
-    return gulp.src('./build', {read: false})
-        .pipe(clean({force: true}))
+    return del.sync('./build/**');
 });
 
 gulp.task('package', ['clean'], () => {
@@ -16,32 +14,32 @@ gulp.task('package', ['clean'], () => {
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('css', ['clean'], () => {
+gulp.task('css', ['clean', 'package'], () => {
     return gulp.src('./src/css/**/*')
         .pipe(gulp.dest('./build/css'));
 });
 
-gulp.task('js', ['clean'], () => {
+gulp.task('js', ['clean', 'package', 'css'], () => {
     return gulp.src('./src/**/*.js')
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('html', ['clean'], () => {
+gulp.task('html', ['clean', 'package', 'css', 'js'], () => {
     return gulp.src('./src/views/**/*.html')
         .pipe(gulp.dest('./build/views'));
 });
 
-gulp.task('fonts', ['clean'], () => {
-    return gulp.src('./src/fonts/**/*')
-        .pipe(gulp.dest('./build/fonts'));
-});
-
-gulp.task('images', ['clean'], () => {
+gulp.task('images', ['clean', 'package', 'css', 'js', 'html'], () => {
     return gulp.src('./src/images/**/*')
         .pipe(gulp.dest('./build/images'));
 });
 
-gulp.task('bower', ['clean'], () => {
+gulp.task('fonts', ['clean', 'package', 'css', 'js', 'html', 'images'], () => {
+    return gulp.src('./src/fonts/**/*')
+        .pipe(gulp.dest('./build/fonts'));
+});
+
+gulp.task('bower', ['clean', 'package', 'css', 'js', 'html', 'images', 'fonts'], () => {
     return gulp.src('./bower_components/**/*')
         .pipe(gulp.dest('./build/bower_components'));
 });
@@ -94,11 +92,11 @@ gulp.task('inject:prod', ['clean', 'package', 'css', 'js', 'html', 'images', 'fo
         .pipe(gulp.dest('./build'));
 });
 
-gulp.task('build:dev', ['inject:dev']);
-gulp.task('build:prod', ['inject:prod']);
+gulp.task('build:dev', ['clean', 'package', 'css', 'js', 'html', 'images', 'fonts', 'inject:dev']);
+gulp.task('build:prod', ['clean', 'package', 'css', 'js', 'html', 'images', 'fonts', 'bower', 'inject:dev']);
 
-gulp.task('watch', ['build:dev'], () => {
-    return watch('./src/**/*', () => gulp.start('build:dev'));
+gulp.task('watch', ['clean', 'build:dev'], () => {
+    return watch('./src/**/*', () => gulp.start(['clean', 'package', 'css', 'js', 'html', 'images', 'fonts', 'inject:dev', 'build:dev']));
 });
 
 gulp.task('default', ['watch']);
