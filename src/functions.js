@@ -33,4 +33,8 @@ const getUA = require('./user-agents');
             event.sender.send('found', error);
         });
     });
+
+    ipcMain.on('debug', (event) => {
+        event.sender.send('debug', process.env.DEBUG);
+    });
 })();

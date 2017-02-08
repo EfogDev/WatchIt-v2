@@ -3,6 +3,7 @@
         <div class="search">
             <span class="search-icon fa fa-search"></span>
             <input type="text" ng-model="search.text" />
+            <span class="search-icon fa fa-times pointer" ng-click="search.text = ''"></span>
         </div>
 
         <div class="serials-list">
@@ -27,7 +28,7 @@
             </div>
 
             <div class="list-container" ng-if="!search.loading">
-                <div class="serial" ng-repeat="serial in serials track by $index" ng-if="!search.text">
+                <div class="serial" ng-click="openSerial(serial)" ng-repeat="serial in serials track by $index" ng-if="!search.text">
                     <serial-item data="serial"></serial-item>
                 </div>
 

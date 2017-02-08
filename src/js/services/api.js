@@ -36,7 +36,6 @@ angular.module('watchit')
                     });
                 });
 
-                console.info(data);
                 return data;
             });
         };

@@ -9,6 +9,13 @@ angular.module('watchit', ['ui.router', 'ngStorage'])
                 controller: 'HomeCtrl'
             })
             .state({
+                name: 'serial-info',
+                url: '/serial-info?link&name',
+                parent: 'home',
+                templateUrl: 'views/serial-info.html',
+                controller: 'SerialInfoCtrl'
+            })
+            .state({
                 name: 'serial',
                 url: '/serial?link',
                 parent: 'home',
@@ -17,4 +24,16 @@ angular.module('watchit', ['ui.router', 'ngStorage'])
             });
 
         $urlRouterProvider.otherwise('/');
+
+        const {ipcRenderer} = require('electron');
+        ipcRenderer.send('debug', null);
+
+        ipcRenderer.once('debug', debug => {
+            if (!debug)
+                return;
+
+            $('<div />').attr('class', 'refresh-button').appendTo(document.body).click(() => {
+                location.reload();
+            });
+        });
     });

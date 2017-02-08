@@ -10,7 +10,7 @@ angular.module('watchit')
             return serial;
         };
 
-        let findSerial = (serialLink) => {
+        this.findSerial = (serialLink) => {
             let serial;
 
             try {
@@ -26,25 +26,28 @@ angular.module('watchit')
             return serials;
         };
 
-        this.addSerial = (link) => {
+        this.addSerial = (link, name, info) => {
             if (serials.filter(s => s.link == link).length)
                 throw new Error('Serial already exists.');
 
             serials.push({
                 watched: false,
+                season: -1,
                 episode: -1,
                 time: 0,
                 image: '',
-                link
+                link,
+                name,
+                info
             });
         };
 
         this.removeSerial = (serialLink) => {
-            delete getSerial(serialLink);
+            serials.splice(_.findIndex(serials, s => s.link == serialLink), 1);
         };
 
-        this.updateTime = (serialLink, episode, time) => {
-            Object.assign(getSerial(serialLink), {episode, time});
+        this.updateTime = (serialLink, season, episode, time) => {
+            Object.assign(getSerial(serialLink), {season, episode, time});
         };
 
         this.setWatched = (serialLink, watchedState) => {
