@@ -21,6 +21,13 @@ angular.module('watchit', ['ui.router', 'ngStorage'])
                 parent: 'home',
                 templateUrl: 'views/serial.html',
                 controller: 'SerialCtrl'
+            })
+            .state({
+                name: 'episode',
+                url: '/episode?link&season&episode',
+                parent: 'home',
+                templateUrl: 'views/episode.html',
+                controller: 'EpisodeCtrl'
             });
 
         $urlRouterProvider.otherwise('/');

@@ -1,8 +1,10 @@
+const electron = require('electron');
+const BrowserWindow = electron.BrowserWindow;
+
 const {ipcMain, net} = require('electron');
 const getUA = require('./user-agents');
 const http = require('http');
 const jsdom = require('jsdom');
-const zlib = require("zlib");
 
 (() => {
     let request;
@@ -47,21 +49,13 @@ const zlib = require("zlib");
 (() => {
     let UA = getUA();
     let request;
-    ipcMain.on('iframe', (event, options) => {
+    ipcMain.on('seasons', (event, options) => {
         if (request)
             request.abort();
 
         let headers = {
             'Referer': options.link,
-            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-            'Accept-Encoding': 'gzip, deflate, sdch',
-            'Accept-Language': 'ru,en;q=0.8',
-            'Cache-Control': 'no-cache',
-            'Connection': 'keep-alive',
-            'DNT': '1',
-            'Host': 's1.yallaneliera.com',
             'Pragma': 'no-cache',
-            'Upgrade-Insecure-Requests': '1',
             'User-Agent': UA
         };
 
@@ -77,73 +71,131 @@ const zlib = require("zlib");
             headers
         }, response => {
             let data = '';
-            let gzip = zlib.createGunzip();
-            response.pipe(gzip);
 
-            gzip.on('data', chunk => {
-                data += chunk;
-            });
+            response.on('data', chunk => data += chunk);
 
-            gzip.on('end', () => {
-                let options = {
-                    'debug=false': true, //yeah, lol
-                    'ad_attr': 0,
-                    'varb1': data.match(/var varb1 = '(.+?)'/im)[1]
-                };
+            response.on('end', () => {
+                let el = document.createElement('div');
+                el.innerHTML = data;
 
-                let match = data.replace(/(\r|\n|\r\n)/gim, '').match(/var session_params = {(.*?)}/im);
-                let params = match[1];
-                let strings = params.match(/(.+?): (.+?),/gim);
-                strings.forEach(s => {
-                     let parsed = s.match(/(.+?): '?(.+?)'?,/im);
-                     if (parsed[1].trim() === 'ad_attr')
-                         return;
+                let seasons = [].slice.call(el.querySelector('select[name="season"]').children).map((node, index) => ({id: index, name: node.innerHTML}));
 
-                     options[parsed[1].trim()] = parsed[2];
-                });
-
-                getPlaylist(parsedUrl, options, data.match(/<meta name="csrf-token" content="(.+?)"/im)[1]).then(data => {
-                    event.sender.send('iframe', data);
-                });
-            });
-
-            gzip.on('error', error => {
-                event.sender.send('iframe', error);
+                event.sender.send('seasons', seasons);
             });
         });
     });
+})();
 
-    let getPlaylist = (url, options, csrf) => {
-        return new Promise((resolve, reject) => {
-            let headers = {
-                'Referer': `http://${url.hostname}/sessions/new_session`,
-                'User-Agent': UA,
-                'X-CSRF-Token': csrf,
-                'X-Var-Document': 'String'
-            };
+(() => {
+    let UA = getUA();
+    let request;
+    ipcMain.on('episodes', (event, options) => {
+        if (request)
+            request.abort();
 
-            let request = http.request({
-                port: 80,
-                host: url.hostname,
-                path: '/sessions/new_session',
-                method: 'POST',
-                headers
-            }, response => {
-                let data = '';
+        let headers = {
+            'Referer': options.link,
+            'Pragma': 'no-cache',
+            'User-Agent': UA
+        };
 
-                response.on('data', chunk => {
-                    data += chunk;
-                });
+        let document = jsdom.jsdom('<html />');
+        let parsedUrl = document.createElement('a');
+        parsedUrl.href = options.url;
 
-                response.on('end', () => {
-                    resolve('END! ' + data);
-                });
+        request = http.get({
+            port: 80,
+            host: parsedUrl.hostname,
+            path: parsedUrl.pathname + `?season=${options.seasonId + 1}&episode=1`,
+            method: 'GET',
+            headers
+        }, response => {
+            let data = '';
+
+            response.on('data', chunk => data += chunk);
+
+            response.on('end', () => {
+                let el = document.createElement('div');
+                el.innerHTML = data;
+
+                let episodes = [].slice.call(el.querySelector('select[name="episode"]').children).map((node, index) => ({id: index, name: node.innerHTML}));
+
+                event.sender.send('episodes', episodes);
+            });
+        });
+    });
+})();
+
+(() => {
+    let UA = getUA();
+    ipcMain.on('video', (event, options) => {
+        let m3u8Parse = (data) => {
+            var lines = data.split(/(\r\n|\n|\r)/);
+            var quality = {};
+
+            lines.forEach((line, index) => {
+                if (/RESOLUTION/.test(line)) {
+                    var keyVal = line.split(/RESOLUTION=/)[1],
+                        val = keyVal.split(',')[0];
+
+                    quality[val.split('x')[1]] = lines[index + 2];
+                }
             });
 
-            console.log(headers);
-            console.log(Object.keys(options).reduce((str, opt) => str + '&' + opt + '=' + options[opt]));
-            request.write(Object.keys(options).reduce((str, opt) => str + '&' + opt + '=' + options[opt]));
-            request.end();
+            return quality;
+        };
+
+        let tempWindow = new BrowserWindow({
+            webPreferences: {nodeIntegration: false},
+            show: false
         });
-    };
+
+        let injector = `
+            new Promise(function (resolve, reject) {
+                resolve(document.body.innerHTML.match(/video_token: '(.*?)',/im)[1]);
+                showVideo();
+            })
+        `;
+
+        tempWindow.webContents.on('did-finish-load', () => {
+            tempWindow.webContents.executeJavaScript(injector, false, token => {
+                let url = `http://s1.yallaneliera.com/video/${token}/index.m3u8?arg=5`;
+
+                request = net.request({
+                    method: 'GET',
+                    url
+                });
+
+                request.setHeader('User-Agent', UA);
+                request.end();
+
+                request.on('response', response => {
+                    let data = '';
+
+                    response.on('data', chunk => {
+                        data += chunk;
+                    });
+
+                    response.on('end', () => {
+                        let quality = m3u8Parse(data);
+
+                        event.sender.send('video', quality);
+                    });
+                });
+            });
+        });
+
+        tempWindow.on('closed', () => {
+            tempWindow = null;
+        });
+
+        tempWindow.webContents.session.webRequest.onBeforeSendHeaders((details, callback) => {
+            details.requestHeaders['User-Agent'] = UA;
+
+            callback({ cancel: false, requestHeaders: details.requestHeaders });
+        });
+
+        tempWindow.webContents.openDevTools();
+        tempWindow.loadURL(options.url + `?season=${++options.season}&episode=${++options.episode}`, {extraHeaders: `Referer: ${options.link}\n`});
+    });
 })();

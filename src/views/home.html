@@ -1,12 +1,44 @@
 <div class="home">
     <div class="left-panel">
-        <div class="search">
+        <div class="search" ng-hide="search.hidden">
             <span class="search-icon fa fa-search"></span>
             <input type="text" ng-model="search.text" />
             <span class="search-icon fa fa-times pointer" ng-click="search.text = ''"></span>
         </div>
 
-        <div class="serials-list">
+        <div class="center-loading" ng-if="options.loading">
+            <div class="cssload-loader">
+                <div class="cssload-inner cssload-one"></div>
+                <div class="cssload-inner cssload-two"></div>
+                <div class="cssload-inner cssload-three"></div>
+            </div>
+        </div>
+
+        <div class="serial-browse" ng-if="serial.data">
+            <div class="back-button" ng-click="back()">
+                &#x27F5; Назад
+            </div>
+
+            <div class="season"
+                 ng-if="!options.loading && serial.season === null"
+                 ng-class="{watched: isSeasonWatched(season)}"
+                 ng-repeat="season in serial.data.seasons track by $index"
+                 ng-click="openSeason(season)">
+                <div class="updated" ng-if="season.updated"></div>
+
+                {{ season.name }}
+            </div>
+
+            <div class="episode"
+                 ng-if="!options.loading && serial.season !== null"
+                 ng-class="{watched: episode.watched}"
+                 ng-repeat="episode in findSeasonEpisodes(serial.season) track by $index"
+                 ng-click="openEpisode(episode)">
+                {{ episode.name }}
+            </div>
+        </div>
+
+        <div class="serials-list" ng-show="options.showSerials">
             <div class="loading" ng-if="search.loading">
                 <div class="cssload-loader">
                     <div class="cssload-inner cssload-one"></div>

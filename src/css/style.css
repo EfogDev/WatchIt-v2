@@ -88,6 +88,7 @@ html, body {
 .serial {
     padding: 10px 20px;
     background: #eee;
+    position: relative;
 }
 
 .serial:hover {
@@ -203,4 +204,70 @@ html, body {
 
 .remove-button:hover {
     background: #b4372a;
+}
+
+.center-loading {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+}
+
+.back-button {
+    padding: 20px;
+    background: #eee;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.serial-browse {
+    margin-top: 59px;
+}
+
+.back-button:hover {
+    background: #ddd;
+}
+
+.season, .episode {
+    padding: 20px;
+    cursor: pointer;
+    position: relative;
+}
+
+.season.watched, .episode.watched {
+    color: rgb(191, 190, 190);
+}
+
+.season:hover, .episode:hover {
+    background: #eee;
+}
+
+.updated {
+    position: absolute;
+    right: 10px;
+    top: 25px;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 20px;
+}
+
+.watch-episode {
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.watch-episode video {
+    height: calc(100vh - 4px);
+    width: 100%;
+}
+
+.video-js {
+    height: 100vh;
+    width: 100%;
 }

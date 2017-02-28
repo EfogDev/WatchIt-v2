@@ -20,6 +20,9 @@
     "ngstorage": "^0.3.11",
     "lodash": "^4.17.4",
     "font-awesome": "^4.7.0",
-    "jquery": "~1.8"
+    "jquery": "~1.8",
+    "video.js": "^5.18.0",
+    "videojs-contrib-hls-dist": "^3.5.4",
+    "vjs-resolution-switcher": "videojs-resolution-switcher#^0.4.2"
   }
 }

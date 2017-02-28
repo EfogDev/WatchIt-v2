@@ -11,15 +11,7 @@ angular.module('watchit')
         };
 
         this.findSerial = (serialLink) => {
-            let serial;
-
-            try {
-                serial = _.find(serials, s => s.link === serialLink);
-            } catch (e) {
-                return null;
-            }
-
-            return serial;
+            return _.find(serials, s => s.link === serialLink);
         };
 
         this.getSerialsList = () => {
@@ -32,9 +24,8 @@ angular.module('watchit')
 
             serials.push({
                 watched: false,
-                season: -1,
-                episode: -1,
-                time: 0,
+                seasons: [],
+                updated: false,
                 image: '',
                 link,
                 name,
@@ -44,6 +35,37 @@ angular.module('watchit')
 
         this.removeSerial = (serialLink) => {
             serials.splice(_.findIndex(serials, s => s.link === serialLink), 1);
+        };
+
+        this.updateSeasons = (serialLink, seasons) => {
+            let serialSeasons = getSerial(serialLink).seasons;
+
+            if (serialSeasons.length < seasons.length) {
+                getSerial(serialLink).seasons = serialSeasons.concat(seasons.splice(serialSeasons.length - seasons.length).map(season => {
+                    season.updated = true;
+
+                    return season;
+                }));
+
+                getSerial(serialLink).updated = true;
+            }
+        };
+
+        this.updateEpisodes = (serialLink, seasonId, episodes) => {
+            let season = getSerial(serialLink).seasons.filter(s => s.id == seasonId)[0];
+
+            if (!season)
+                return null;
+
+            if (!season.episodes) {
+                season.episodes = episodes;
+            } else {
+                if (episodes.length > season.episodes.length) {
+                    season.episodes = season.episodes.concat(episodes.splice(season.episodes.length - episodes.length));
+
+                    getSerial(serialLink).updated = true;
+                }
+            }
         };
 
         this.updateTime = (serialLink, season, episode, time) => {

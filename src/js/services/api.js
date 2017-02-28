@@ -3,7 +3,7 @@ angular.module('watchit')
     .service('API', function ($http, DOM) {
         const {ipcRenderer} = require('electron');
 
-        this.loadEpisodes = (link) => {
+        this.loadSeasons = (link) => {
             return new Promise((resolve, reject) => {
                 $http.get(link).then(response => {
                     let el = DOM(response.data);
@@ -14,16 +14,63 @@ angular.module('watchit')
 
                     return frame.getAttribute('src');
                 }).then(url => {
-                    console.log('Connecting with backend...');
-                    ipcRenderer.send('iframe', {url, link});
+                    ipcRenderer.send('seasons', {url, link});
 
-                    return new Promise((resolve, reject) => {
-                        ipcRenderer.once('iframe', (event, data) => {
+                    return new Promise(resolve => {
+                        ipcRenderer.once('seasons', (event, data) => {
                             resolve(data);
                         });
                     });
                 }).then(data => {
-                    console.log(data);
+                    resolve(data);
+                });
+            });
+        };
+
+        this.loadEpisodes = (link, seasonId) => {
+            return new Promise((resolve, reject) => {
+                $http.get(link).then(response => {
+                    let el = DOM(response.data);
+                    let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
+
+                    if (!frame)
+                        throw new Error('Ошибка. Возможно, это не сериал?');
+
+                    return frame.getAttribute('src');
+                }).then(url => {
+                    ipcRenderer.send('episodes', {url, link, seasonId});
+
+                    return new Promise(resolve => {
+                        ipcRenderer.once('episodes', (event, data) => {
+                            resolve(data);
+                        });
+                    });
+                }).then(data => {
+                    resolve(data);
+                });
+            });
+        };
+
+        this.getVideo = (link, season, episode) => {
+            return new Promise((resolve, reject) => {
+                $http.get(link).then(response => {
+                    let el = DOM(response.data);
+                    let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
+
+                    if (!frame)
+                        throw new Error('Неизвестная ошибка. Попробуйте позже.');
+
+                    return frame.getAttribute('src');
+                }).then(url => {
+                    ipcRenderer.send('video', {url, link, season, episode});
+
+                    return new Promise(resolve => {
+                        ipcRenderer.once('video', (event, data) => {
+                            resolve(data);
+                        });
+                    });
+                }).then(data => {
+                    resolve(data);
                 });
             });
         };

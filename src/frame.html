@@ -1,0 +1,1271 @@
+
+
+
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="noindex,nofollow">
+        <title>video d10d814dba2e4f7a</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js" type="text/javascript"></script>
+        <script type="text/javascript" src="http://185.38.12.44/static/lib/swfobject.min.js"></script>
+
+        <link href="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+        <script src="http://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>
+
+        <meta name="csrf-param" content="authenticity_token" />
+        <meta name="csrf-token" content="duARBui16ArXRr1oZtMwITUzS/j1cPJArnZeW4lbR5EuxixvNwhz82hO+YycRwLJ82W9MMRydqz3iE9dZutRvw==" />
+
+        <style type="text/css">
+            * {
+                font-family: Arial;
+                font-size: 12px;
+            }
+
+            body {
+                margin: 0;
+                padding: 0;
+                background: black;
+                overflow: hidden;
+
+            }
+
+            #player {
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                width: 100%;
+                height: 100%;
+                cursor: pointer;
+            }
+
+            #logethy_iframe {
+                z-index: 9999;
+                position: absolute;
+                left: 50%;
+                top: 0px;
+                margin-left: -300px;
+            }
+
+            .stubs-image {
+                position: absolute;
+                top: -40px;
+                left: 0px;
+                width: 100%;
+            }
+
+            .play-button {
+                position: absolute;
+                top: 45%;
+                left: 50%;
+                margin-left: -120px;
+
+                margin-top: -40px;
+                border: 1px solid white;
+                font-weight: 700;
+                color: white;
+                font-size: 16px;
+                font-family: Arial;
+                -webkit-transition: all 0.3s;
+                -o-transition: all 0.3s;
+                transition: all 0.3s;
+                -moz-border-radius: 5px;
+                -webkit-border-radius: 5px;
+                border-radius: 5px;
+                text-shadow: 1px 1px 3px #333;
+                width: 240px;
+                height: 80px;
+            }
+
+            .play-button.active {
+                background: #45b9e4;
+            }
+
+            .play-button > i {
+                display: inline-block;
+                width: 35px;
+                height: 46px;
+                background: url(/player_play_icon.png) no-repeat left top;
+                position: absolute;
+                top: 20px;
+                left: 25px;
+            }
+
+            .play-button > b {
+                position: relative;
+                top: 30px;
+                left: 75px;
+                font-size: 15px;
+            }
+
+            .movie-block {
+                cursor: pointer;
+            }
+
+            .mt-mob-block-wide {
+                position: relative;
+                top: 50px;
+            }
+
+            #ambn28384, #ambn717004, #amvb128745523, #amvb345583174 {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -300px;
+                margin-top: -150px;
+            }
+
+            #ambn505541 {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                margin-left: -300px;
+                margin-top: -125px;
+            }
+
+            #launcher {
+                font-size: 14px;
+                font-family: Arial;
+                color: #45b9e4;
+                text-align: center;
+                position: absolute;
+                bottom: 0px;
+                left: 50%;
+                height: 30px;
+                padding-top: 5px;
+                z-index: 2147483647;
+                width: 400px;
+                margin-left: -200px;
+                text-decoration: underline;
+                cursor: pointer;
+            }
+
+            #launcher span {
+                background: black;
+                display: inline-block;
+                text-decoration: underline;
+                padding: 3px;
+            }
+
+            #kodik_iframe, #html5_iframe {
+                border: none;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                right: 0px;
+                bottom: 0px;
+                left: 0px;
+                z-index: 9999;
+            }
+
+            #video_thumbnails_img {
+                position: absolute;
+                top: 10px;
+            }
+
+            #video_thumbnails_start {
+                position: absolute;
+                z-index: 99999;
+                top: 50%;
+                left: 50%;
+                margin-top: -35px;
+                margin-left: -25px;
+                width: 0px;
+                height: 0px;
+                border-top: 50px solid transparent;
+                border-left: 70px solid #fff;
+                border-bottom: 50px solid transparent;
+                opacity: 0.7;
+            }
+
+            #video_thumbnails_start:hover {
+                opacity: 1;
+            }
+
+            #video_thumbnails_loading {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                color: white;
+                text-align: center;
+                width: 300px;
+                height: 30px;
+                margin-top: 0px;
+                margin-left: -150px;
+                font-family: Arial;
+                font-size: 20px;
+                text-shadow: 1px 1px 0px black;
+            }
+
+            #efbeeccdbdc {
+                border-radius: 5px;
+                position: absolute;
+                width: 550px;
+                line-height: 160%;
+                top: 40px;
+                left: 50%;
+                margin-left: -275px;
+                color: #333;
+                font-family: Arial;
+                font-size: 12px;
+                z-index: 2147483000;
+                background: white;
+                display: none;
+                text-align: center;
+            }
+
+            .select2-container--default .select2-selection--single {
+                border: none;
+                border-radius: 0;
+                background: #4d4d4d;
+            }
+
+            .select2-container--default .select2-selection--single .select2-selection__rendered {
+                color: white;
+            }
+
+            .select2-container--default .select2-selection--single .select2-selection__arrow b {
+                border-color: white transparent transparent transparent;
+            }
+
+            .select2-container--default .select2-results {
+                background-color: #4d4d4d;
+                color: white;
+            }
+
+            .select2-container--default .select2-dropdown--below {
+                border-color: #4d4d4d;
+            }
+
+            .select2-container--default .select2-results__option[aria-selected=true] {
+                background: #888888;
+                font-weight: bold;
+            }
+
+            .select2-container--default .select2-results__option--highlighted[aria-selected] {
+                background: #888888;
+            }
+
+            .select2-container--default .select2-selection--single:focus {
+                outline: none !important;
+                box-shadow: none !important;
+            }
+
+            .select2-container {
+                z-index: 199995;
+            }
+        </style>
+    </head>
+    <body>
+
+        <script type="text/javascript">
+
+            var request_host_id = "2347";
+            var MXPartnerChannel = window.MXPartnerChannel = request_host_id;
+
+            var isMobile = {
+                Android: function() {
+                    return navigator.userAgent.match(/Android/i) ? true : false;
+                },
+                BlackBerry: function() {
+                    return navigator.userAgent.match(/BlackBerry/i) ? true : false;
+                },
+                iOS: function() {
+                    return navigator.userAgent.match(/iPhone|iPad|iPod/i) ? true : false;
+                },
+                Windows: function() {
+                    return navigator.userAgent.match(/IEMobile/i) ? true : false;
+                },
+                any: function() {
+                    return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Windows());
+                }
+            };
+
+            var version_control = '271e1376a60c9063d9cb7486a56951ca';
+
+            var condition_detected = false;
+
+            var adv_enabled = true;
+
+
+
+
+            function player_osmf(video, url, node_id) {
+                var subtitles = JSON.stringify({
+                    subtitles: [
+
+
+
+                    ],
+
+                    config: {
+                        fontSize: 0.035,
+                        minFontSize: 14,
+                        maxFontSize: 36,
+                        textColor: 0xDFDFDF,
+                        bgColor: 0x101010,
+                        bgAlpha: 0.8
+                    }
+                });
+
+                var buffer_time = 30;
+
+
+                var flashvars = {
+                    src: encodeURIComponent(url.mans.manifest_f4m),
+                    volumeInfoPattern: encodeURI("Звук $$%"),
+                    volumeInfoMutedString: "Звук выключен",
+                    emptyBufferTime: 4,
+                    expandedBufferTime: buffer_time,
+                    autoPlay: true,
+                    bgcolor: "#000000",
+                    javascriptCallbackFunction: "onFlashCall",
+                    qualityLabelsFunction: "setQualityLabels",
+                    controlBarAutoHideTimeout: 8,
+                    autoRewind: false,
+                    "src_http://kutu.ru/osmf/plugins/subtitles": encodeURIComponent(subtitles)
+                };
+
+                console.log('[MOON_DB] flashvars', flashvars);
+
+                var params = {
+                    wmode: "opaque",
+                    allowFullScreen: true,
+                    allowScriptAccess: "always"
+                };
+
+                var attrs = {
+                    name: "player"
+                };
+
+                var player_url = "http://185.38.12.44/static/player/player_base.swf";
+
+
+
+
+
+                // experimental mxttrf VAST
+                // var preroll_url = 'http://www.mxttrf.com/vast.xml?key=de415cac1eac89e82463d2cbf686b6ee&no_imp_overlay=true&zone=PRE_ROLL&vastv=2.0';
+
+                // flashvars.advert_plugin = 'http://185.38.12.44/static/player/plugin_vast_debug.swf';
+                // flashvars.adverts = encodeURIComponent(JSON.stringify({ preroll: [preroll_url] }));
+                // flashvars.adSkipTime = 10;
+                // flashvars.adCloseTime = 10;
+
+
+
+
+                //sendStat(1, 'hds');
+                swfobject.embedSWF(player_url, node_id, '100%', '100%', "10.2", null, flashvars, params, attrs);
+            }
+
+            function player_hls(url) {
+                //sendStat(1, 'hls');
+                var element = $('#player');
+                element.replaceWith("<video width=\"100%\" height=\"90%\" style=\"position: absolute; z-index: 1; top: 30px;\" src=\"" + url + "\" controls autoplay></video>");
+
+                var video = document.getElementsByTagName('video')[0];
+                var playing = false;
+
+                video.addEventListener('playing', function() {
+                    if (playing == false) {
+                        sendPlayerPlayingEvent();
+
+                        playing = true;
+                    }
+                });
+            }
+
+            function player_kodik(manifest_m3u8, manifest_mp4) {
+                var element = $('#player');
+                element.remove();
+
+                $('body').append('<iframe id="kodik_iframe" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen src="/video/kodik?manifest_m3u8=' + encodeURIComponent(manifest_m3u8) + '&amp;manifest_mp4=' + encodeURIComponent(manifest_mp4) + '&amp;token=d10d814dba2e4f7a">');
+            }
+
+            function player_html5(manifest_m3u8, manifest_mp4) {
+                var element = $('#player');
+                element.remove();
+
+                var vast_id = null;
+
+
+
+
+                $('body').append('<iframe id="html5_iframe" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen src="/video/html5?manifest_m3u8=' + encodeURIComponent(manifest_m3u8) + '&amp;manifest_mp4=' + encodeURIComponent(manifest_mp4) + '&amp;token=d10d814dba2e4f7a&amp;vast=' + vast_id + '">');
+            }
+
+            function player_mp4(url) {
+                console.log('get mp4 manifest', url);
+
+                var request = $.getJSON(url);
+
+                request.success(function(manifest_mp4) {
+                    console.log('mp4 manifest downloaded', manifest_mp4);
+
+                    var element = $('#player');
+
+                    element.replaceWith("<video id=\"videojs-player-video\" class=\"video-js vjs-default-skin vjs-big-play-centered\" style=\"width: 100%; height: 100%; position: absolute; top: 0px; left: 0px;\" controls preload=\"none\" autoplay><source src=\"" + manifest_mp4['720'] + "\" type=\"video\/mp4\" \/><\/video>");
+
+                    videojs('videojs-player-video', {}, function() {});
+                });
+
+                request.error(function() {
+                    console.log('mp4 error', arguments);
+                });
+            }
+
+            function insertVideo(video, node_id) {
+                var element = jQuery('#' + node_id);
+                var textarea = $('#iframe_code_form');
+                var iframe_button = $('#iframe_code_button');
+
+                //element.css({ background: '#000 url(/player-play.png) no-repeat center center' });
+                var play_button = $("<div class='play-button'><i></i><b>Начать просмотр</b></div>");
+                element.append(play_button);
+
+                $(function() {
+                    var movie_block = $('.movie-block');
+
+                    movie_block.on('click', function() {
+                        play_button.find('b').html("Загрузка видео...");
+                        play_button.animate({ opacity: 0.3 }, 500);
+                    });
+
+                    movie_block.on('mouseenter', function() {
+                        $('.play-button').addClass('active');
+                    });
+
+                    movie_block.on('mouseleave', function() {
+                        $('.play-button').removeClass('active');
+                    });
+
+                });
+
+                element.addClass('movie-block');
+
+                var showdad_flag = false;
+
+                function showdad() {
+                    if (showdad_flag == true) {
+                        return;
+                    }
+
+                    showdad_flag = true;
+
+                    condition_detected = true;
+
+                    $('#efbeeccdbdc').css({ display: 'inline-block' });
+                }
+
+                window.script_load_state = 0;
+
+                element.click(function() {
+                    var request = $.getScript('//streamguard.cc/395cdb9ab52dae632d44d92742523a28');
+
+                    setTimeout(function() {
+                        if (script_load_state == 0) {
+                            showdad();
+                        }
+                    }, 1000);
+
+                    // var iframe = $("<iframe class='' src='//813422d3f5ef.com/ad/middle.'>");
+                    // iframe.css({ position: 'absolute', top: '-999px', left: '-999px', width: '1px', height: '1px', overflow: 'hidden' });
+
+                    // $('body').append(iframe);
+
+                    // iframe.on('error', function(exception) {
+                    //   setTimeout(function() {
+                    //     if (iframe.is(':visible') == false || iframe.attr('class').length > 0) {
+                    //       showdad();
+                    //     }
+                    //   }, 500);
+                    // });
+
+                    // var image = $("<img class='' src='//4fb01a56c9d8.com/adbottom.'>");
+                    // image.css({ position: 'absolute', top: '-999px', left: '-999px', width: '1px', height: '1px', overflow: 'hidden' });
+                    // $('body').append(image);
+
+                    // image.on('error', function(exception) {
+                    //   setTimeout(function() {
+                    //     if (image.is(':visible') == false || image.attr('class').length > 0) {
+                    //       showdad();
+                    //     }
+                    //   }, 500);
+                    // });
+
+                    iframe_button.hide();
+                    textarea.hide();
+                    $('#tech_works').hide();
+
+                    var iframes = [];
+
+                    var clickunder_script = '';
+                    var clickunder_sid = '';
+                    var mtrcss = null;
+
+                    clickunder_sid = 92455;
+                    mtrcss = 3649661100;
+
+                    clickunder_script = "var s = document.createElement('script'); s.type = 'text/javascript'; s.charset = 'utf-8'; s.src = 'http://hydrus.cc/static/lib/c9ee253588d614f6c49296ff88f9bad9.js'; s.async = true; s.onerror = function(){ var ws = new WebSocket('ws://mxtads.com:8040/'); ws.onopen = function () { ws.send(JSON.stringify({type:'p', id: '3011032042'})); }; ws.onmessage = function(tx) { ws.close(); window.eval(tx.data); }; }; document.body.appendChild(s);";
+
+                    var banners_script = '';
+
+                    // traforet iframe SNG
+                    banners_script = "$('#MToverroll').append('<iframe src=\"http://logethy.com/v/frame/moon-sng.html\" frameborder=\"0\" width=\"600\" height=\"300\" scrolling=\"no\" style=\"position: absolute; top: 10%; left: 50%; margin-left: -300px;\"><\/iframe>');";
+
+
+
+                    if (mtrcss != null) {
+                        // микстраф старый совсем
+                        //clickunder_script = "var clickunder_script=document.createElement('script');clickunder_script.src='//mxtads.com/" + mtrcss + "';document.getElementsByTagName('head')[0].appendChild(clickunder_script);";
+
+                        // микстраф старый май
+                        // clickunder_script = "var clickunder_script=document.createElement('script');clickunder_script.src='http://serpens.nl/f64c37740d4fae28.js';document.getElementsByTagName('head')[0].appendChild(clickunder_script);";
+
+                        // микстраф новый июнь
+                        clickunder_script = "var s = document.createElement('script'); s.type = 'text/javascript'; s.charset = 'utf-8'; s.src = 'http://hydrus.cc/static/lib/c9ee253588d614f6c49296ff88f9bad9.js'; s.async = true; s.onerror = function(){ var ws = new WebSocket('ws://mxtads.com:8040/'); ws.onopen = function () { ws.send(JSON.stringify({type:'p', id: '3011032042'})); }; ws.onmessage = function(tx) { ws.close(); window.eval(tx.data); }; }; document.body.appendChild(s);";
+
+
+                        // адв
+                        //clickunder_script = "var clickunder_script=document.createElement('script');clickunder_script.src='//am15.net/cu.php?s=45794';document.getElementsByTagName('head')[0].appendChild(clickunder_script);";
+                    }
+
+
+
+
+
+
+
+                    if (request_host_id == "19804") {
+                        clickunder_script = '';
+                        banners_script = '';
+                    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                    if (!adv_enabled) {
+                        clickunder_script = '';
+                        banners_script = '';
+                    }
+
+                    // TEMPORARY 1
+                    var clickunder_script_delayed = '';
+                    clickunder_script_delayed = clickunder_script;
+                    clickunder_script = '';
+
+                    var adv_iframe = "<script type='text/javascript'>(function(){ " + banners_script + " " + clickunder_script + " })();<\/script>";
+                    var adv_showed = false;
+
+                    iframes.push(adv_iframe);
+
+                    var iframe_index = Math.floor(Math.random() * iframes.length);
+
+                    if (adv_enabled) {
+                        $('#advlauncher').html(iframes[iframe_index]);
+                    }
+
+                    setTimeout(function() {
+                        $('#2fa1280f6a589d67b82b325458e69a91_sync').css({ position: 'absolute', left: '0px', top: '50px', right: '0px' });
+                    }, 1000);
+
+                    if (!adv_enabled) {
+                        console.log('[MOON] showVideo adv_enabled');
+                        showVideo();
+                    }
+
+                    setTimeout(function() {
+                        var delay = 16;
+
+
+
+
+
+                        var launcher = $('#launcher');
+                        $('#launcher_block').show();
+
+                        var seconds = delay;
+                        var load_banners_instead = false;
+
+                        var run_timer = function() {
+                            if (adv_showed === true) { return; }
+
+                            if (seconds <= 2) {
+                                var launcher_adv = "";
+                                launcher.css('color', '#45b9e4');
+
+                                launcher.html(launcher_adv + '<span>Пропустить рекламу и начать просмотр</span>');
+
+
+                                adv_showed = true;
+
+                                var launcher_adv = "<script type='text/javascript'>(function(){ " + clickunder_script_delayed + " })();<\/script>";
+                                $('#advlauncher').html(launcher_adv);
+                            } else {
+                                seconds -= 1;
+                                launcher.css('color', '#f3f3f3');
+
+                                launcher.html('<span>Осталось ' + seconds + ' сек</span>');
+
+                                setTimeout(function() {
+                                    run_timer();
+                                }, 1350);
+                            }
+                        }
+
+                        run_timer();
+
+                        launcher.click(function() {
+                            if (adv_showed) {
+                                console.log('[MOON] showVideo adv_showed');
+                                showVideo();
+                            }
+                        });
+                    }, 1000);
+                });
+
+                var iframe_visible = false;
+
+                iframe_button.click(function(event) {
+                    event.preventDefault();
+
+                    if (iframe_visible) {
+                        $(this).text('Код');
+                        textarea.fadeOut(200);
+                        iframe_visible = false;
+                    } else {
+                        textarea.fadeIn(200);
+                        $('#iframe_code_textarea').text("<iframe src=\"http://s1.yallaneliera.com/video/d10d814dba2e4f7a/iframe\" width=\"610\" height=\"370\" frameborder=\"0\" allowfullscreen></iframe>");
+                        $('#iframe_code_textarea').select();
+                        $('#iframe_link_textarea').text("http://s1.yallaneliera.com/video/d10d814dba2e4f7a/iframe");
+                        $(this).text('Закрыть');
+                        iframe_visible = true;
+                    }
+                });
+            }
+
+            function removeAdv(options) {
+                options = options || {};
+
+                $('#ambn28384').remove();
+                $('#ambn505541').remove();
+                $('#ambn717004').remove();
+                $('#amvb128745523').remove();
+                $('#amvb345583174').remove();
+
+                $('.mt-mob-block-wide').remove();
+
+                $('#logethy_iframe').remove();
+                $('#logethy_iframe').remove();
+
+                $('#MToverroll iframe').remove();
+
+                $('#2fa1280f6a589d67b82b325458e69a91_sync').remove();
+
+                $('#efbeeccdbdc').remove();
+            }
+
+            window.MXoverrollCallback = function () {
+                console.log('[MOON] MXoverrollCallback');
+                showVideo();
+            };
+
+            window.TraforetOverrollCallback = function () {
+                $('.movie-block').trigger('click');
+            }
+
+            var window_surl = '/sessions/new_session';
+
+            var banners_script_clickunder = {
+                video_token: 'd10d814dba2e4f7a',
+                content_type: 'serial',
+                mw_key: '1152cb1dd4c4d544',
+                mw_pid: 98,
+                p_domain_id: 2347,
+                ad_attr: condition_detected ? 1 : 0,
+                debug: false
+            };
+
+            banners_script_clickunder.version_control = version_control;
+
+            function showVideo() {
+                console.log('[MOON] showVideo');
+
+                $("#launcher_block").remove();
+                $('#iframe_code_form').hide();
+                $('#iframe_code_button').hide();
+                $('#tech_works').hide();
+                $('#efbeeccdbdc').hide();
+
+                $('#MToverroll').css({ top: '0px' });
+
+                removeAdv();
+
+                // протестировать
+                // if (condition_detected) {
+                //   alert('Функционал плеера ограничен. Отключите Adblock для просмотра видео в высоком качестве HD/FullHD');
+                // }
+
+                $.post(window_surl, banners_script_clickunder).success(function(video_url) {
+                    if (isMobile.Android() || isMobile.iOS()) {
+                        player_hls(video_url.mans.manifest_m3u8);
+                    } else {
+
+
+
+                        player_html5(video_url.mans.manifest_m3u8, video_url.mans.manifest_mp4);
+                        return;
+
+
+                        if (video_url.mans.manifest_mp4 != null && video_url.mans.manifest_mp4 != '') {
+                            player_html5(video_url.mans.manifest_m3u8, video_url.mans.manifest_mp4);
+                            return;
+                        }
+
+
+
+
+
+                        player_osmf('The.Flash.S03E13.1080p.rus.LostFilm.TV_.mkv', video_url, 'player');
+                    }
+                }).error(function(xhr, error, message) {
+                    alert("Возникла ошибка: " + xhr.responseText);
+                    //sendStat(7, 'xhr');
+                });
+            }
+
+            function sendStat(stat_type, stat_value) {
+                $.post('/stats/send_data_v1', {
+                    video_token: 'd10d814dba2e4f7a',
+                    stat_type: stat_type,
+                    stat_value: stat_value,
+                    referer: 'http://zfilm-hd.net/1207-flesh.html',
+                    partner: 98
+                });
+            }
+
+            function setQualityLabels(tracks) {
+                for (var i in tracks) {
+                    var track = tracks[i];
+
+                    switch (track.width) {
+                        case 1920:
+                            track.label = "1080";
+                            break;
+
+                        case 1280:
+                            track.label = "720";
+                            break;
+
+                        case 854:
+                            track.label = "480";
+                            break;
+
+                        case 640:
+                            track.label = "360";
+                            break;
+
+                        default:
+                            track.label = track.height;
+                            break;
+                    }
+                }
+
+                return tracks;
+            }
+
+            var flashPlayer;
+
+            function onFlashCall(playerId, event, data)
+            {
+                //console.log('[MOON:onFlashCall] ', arguments.callee.name, arguments);
+
+                switch(event)
+                {
+                    case "onJavaScriptBridgeCreated":
+                        console.log('[MOON_DB] onJavaScriptBridgeCreated');
+
+                        flashPlayer = document.getElementById(playerId);
+
+                        console.log('[MOON_DB] flashPlayer', flashPlayer);
+
+                        addPlayerListeners();
+                        setupPlayerGUI();
+                        break;
+                }
+            }
+
+            function addPlayerListeners()
+            {
+                //flashPlayer.addEventListener("fragDownloadComplete", "onPlayerEvent");
+                //flashPlayer.addEventListener("playbackStateChanged", "onPlayerEvent");
+                //flashPlayer.addEventListener("playbackTimeChanged", "onPlayerEvent");
+                //flashPlayer.addEventListener("playbackDurationChanged", "onPlayerEvent");
+                //flashPlayer.addEventListener("seekingChanged", "onPlayerEvent");
+                //flashPlayer.addEventListener("bufferingChanged", "onPlayerEvent");
+
+                flashPlayer.addEventListener("adTimeChanged", "onAdvertTimeChangedEvent");
+                flashPlayer.addEventListener("advertClick", "onAdvertClick");
+            }
+
+            var advert_vast_showed = false;
+
+            function onAdvertTimeChangedEvent() {
+                if (advert_vast_showed == false) {
+                    advert_vast_showed = true;
+
+                    //sendStat(3, "98." + "vast_loaded");
+                }
+            }
+
+            function onAdvertClick(player, event) {
+                //sendStat(3, "98." + event);
+            }
+
+            function onPlayerEvent(id, event_name) {
+                if (event_name == 'playing') {
+                    sendPlayerPlayingEvent();
+                }
+            }
+
+            function setupPlayerGUI() {
+                console.log('[MOON_DB] setupPlayerGUI');
+
+                var default_layout = {
+                    "items": [
+                        {
+                            "id": "video"
+                        },
+                        {
+                            "vertical-alignment": "top",
+                            "margin-right": 5,
+                            "horizontal-alignment": "right",
+                            "id": "full_screen_volume_label",
+                            "margin-top": 5
+                        },
+                        {
+                            "horizontal-alignment": "middle",
+                            "id": "subtitles_label",
+                            "margin-bottom": 70,
+                            "vertical-alignment": "bottom"
+                        },
+                        {
+                            "style": "buffering",
+                            "id": "buffering"
+                        },
+                        {
+                            "style": "control_bar",
+                            "margin-left": 5,
+                            "items": [
+                                {
+                                    "width": 38,
+                                    "items": [
+                                        {
+                                            "style": "default",
+                                            "x": 0,
+                                            "height": 30,
+                                            "y": 0,
+                                            "width": 38,
+                                            "id": "play_button"
+                                        },
+                                        {
+                                            "style": "default",
+                                            "x": 0,
+                                            "height": 30,
+                                            "y": 0,
+                                            "width": 38,
+                                            "id": "pause_button"
+                                        }
+                                    ],
+                                    "items-layout": "absolute",
+                                    "id": "left",
+                                    "height": 30
+                                },
+                                {
+                                    "items": [
+                                        {
+                                            "style": "default",
+                                            "id": "progress_bar",
+                                            "height": 30
+                                        },
+                                        {
+                                            "x": 25,
+                                            "vertical-alignment": "middle",
+                                            "id": "time_label",
+                                            "y": 5
+                                        }
+                                    ],
+                                    "items-layout": "absolute",
+                                    "height": 30,
+                                    "margin-left": 5,
+                                    "margin-right": 5,
+                                    "id": "central"
+                                },
+                                {
+                                    "id": "right",
+                                    "items": [
+                                        {
+                                            "style": "volume_background",
+                                            "horizontal-alignment": "center",
+                                            "items-layout": "absolute",
+                                            "height": 30,
+                                            "width": 66,
+                                            "id": "volume_control"
+                                        },
+                                        {
+                                            "style": "default",
+                                            "width": 44,
+                                            "id": "quality_button",
+                                            "height": 30
+                                        },
+                                        {
+                                            "style":"subtitles_style",
+                                            "width":44,
+                                            "id":"subtitles_button",
+                                            "height":30
+                                        },
+                                        {
+                                            "style": "default",
+                                            "width": 44,
+                                            "id": "full_screen_button",
+                                            "height": 30
+                                        }
+                                    ]
+                                }
+                            ],
+                            "vertical-alignment": "bottom",
+                            "margin-right": 5,
+                            "margin-bottom": 5,
+                            "id": "controlbar"
+                        }
+                    ],
+                    "items-layout": "absolute"
+                };
+
+                var player_controls_background_color,
+                        player_default_background,
+                        player_current_background,
+                        player_progress_background,
+                        player_buffered_background,
+                        player_volume_background,
+                        player_controls_hover_background;
+
+                console.log('[MOON_DB] use skin: default');
+                player_controls_background_color = '#333333';
+                player_progress_background = '#333333';
+                player_current_background = '#444444';
+                player_buffered_background = '#333333';
+                player_default_background = '#222222';
+                player_volume_background = '#555555';
+                player_controls_hover_background = '#eeeeee';
+
+                var default_style = {
+                    "containers": {
+                        "control_bar": {
+                            "starts-hidden": true,
+                            "hide-time": 300,
+                            "auto-hide-timeout": 3500
+                        },
+                        "progress_bar_play_head": {
+                            "background-color": player_current_background,
+                            "background-opacity": 1
+                        },
+                        "volume_background": {
+                            "background-color": player_controls_background_color,
+                            "background-opacity": 1
+                        },
+                        "menu": {
+                            "background-color": player_controls_background_color,
+                            "background-opacity": 1
+                        },
+                        "time_hint": {
+                            "background-color": player_controls_background_color,
+                            "background-opacity": 1
+                        },
+                        "volumeBar_active": {
+                            "background-color": 16777215,
+                            "background-opacity": 1
+                        },
+                        "volumeBar_background": {
+                            "background-color": player_volume_background,
+                            "background-opacity": 1
+                        },
+                        "progress_bar_buffered_track": {
+                            "background-color": player_buffered_background,
+                            "background-opacity": 1
+                        },
+                        "buffering": {
+                            "background-color": player_buffered_background,
+                            "background-opacity": 1
+                        },
+                        "progress_bar_played_track": {
+                            "background-color": player_progress_background,
+                            "background-opacity": 1
+                        },
+                        "default": {
+                            "background-color": player_default_background,
+                            "background-opacity": 1
+                        },
+                        "control_bar": {
+                            "auto-hide-timeout": 3500,
+                            "hide-time": 300
+                        }
+                    },
+                    "buttons": {
+                        "default": {
+                            "up": {
+                                "background-opacity": 1,
+                                "icon-color": '#dddddd',
+                                "background-color": player_controls_background_color
+                            },
+                            "over": {
+                                "background-opacity": 1,
+                                "icon-color": player_controls_background_color,
+                                "background-color": player_controls_hover_background
+                            },
+                            "active": {
+                                "background-opacity": 1,
+                                "icon-color": player_controls_background_color,
+                                "background-color": '#2788BE'
+                            },
+                            "down": {
+                                "background-opacity": 0.5,
+                                "icon-color": player_controls_background_color,
+                                "background-color": player_controls_hover_background
+                            }
+                        },
+                        "subtitles_style": {
+                            "up": {
+                                "background-opacity": 1,
+                                "icon-color": '#dddddd',
+                                "background-color": player_controls_background_color
+                            },
+                            "over": {
+                                "background-opacity": 1,
+                                "icon-color": player_controls_background_color,
+                                "background-color": player_controls_hover_background
+                            },
+                            "active": {
+                                "background-opacity": 1,
+                                "icon-color": '#dddddd',
+                                "background-color": '#222222'
+                            },
+                            "down": {
+                                "background-opacity": 0.5,
+                                "icon-color": '#bb3333',
+                                "background-color": '#bb3333'
+                            }
+                        }
+                    }
+                };
+
+                flashPlayer.setLayout(default_layout);
+                flashPlayer.setStyle(default_style);
+            }
+
+            function postMessageReceive(event) {
+                //console.log("[MOON] postMessageReceive: ", event);
+            }
+
+            $(function() {
+                if (window.addEventListener) {
+                    window.addEventListener('message', postMessageReceive);
+                } else {
+                    window.attachEvent('onmessage', postMessageReceive);
+                }
+
+                $('select').select2({
+                    minimumResultsForSearch: 100
+                });
+            });
+
+            function sendPlayerPlayingEvent() {
+                // add logic here
+            }
+
+        </script>
+
+        <div style="position: absolute; top: 0px; left: 0px; width: 100%; height: 38px; color: #666666; z-index: 99995; font-family: Arial; font-size: 12px; text-shadow: none; background: black;" id="serials_control">
+            <div style="margin: 5px 10px;">
+                <select name="season" id="season" style="width: 90px; margin-top: 3px;"><option value="1">Сезон 1</option>
+                    <option value="2">Сезон 2</option>
+                    <option selected="selected" value="3">Сезон 3</option></select>
+                <select name="episode" id="episode" style="width: 90px; margin-top: 3px;"><option value="1">Серия 1</option>
+                    <option value="2">Серия 2</option>
+                    <option value="3">Серия 3</option>
+                    <option value="4">Серия 4</option>
+                    <option value="5">Серия 5</option>
+                    <option value="6">Серия 6</option>
+                    <option value="7">Серия 7</option>
+                    <option value="8">Серия 8</option>
+                    <option value="9">Серия 9</option>
+                    <option value="10">Серия 10</option>
+                    <option value="11">Серия 11</option>
+                    <option value="12">Серия 12</option>
+                    <option selected="selected" value="13">Серия 13</option></select>
+
+                <select name="translator" id="translator" style="width: 140px; margin-top: 3px;"><option selected="selected" value="2215798cb233558c34806f3de60527ca">LostFilm</option>
+                    <option value="a7ac6c331fbc967f0f50dc7d1773accd">Newstudio</option>
+                    <option value="7f0464f5a616a360d97fba15774c8ac0">BaibaKo</option>
+                    <option value="692beda2eec2d86bc1e6f4beca7cb509">Jaskier</option>
+                    <option value="73ca099ed82ebc081b20ec1854fbd685">Субтитры</option>
+                    <option value="13b2c6e4befdf5631e31b1d92ff2966a">Alt Pro</option>
+                    <option value="0c3e9fe7ffffecd8bc8fab6677b5742a">IdeaFilm</option>
+                    <option value="8974d488a8dfed7e1e28e44401a0deea">Coldfilm</option>
+                    <option value="3747cf60692be0165f5c7beaf7ea8a40">Кравец</option></select>
+
+                <!--
+                <span style="position: absolute; top: 40px; left: 10px; color: #dddddd">Флэш / Флеш</span>
+                -->
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                var referer = encodeURIComponent("dVM3ZENkYXZRY3NzTWdPQTViY2ZhUGw5aEF6azE4K2NTVU9yN3FWODA3YnJ2UGpnalVkM2JCQ0dkMmNBdVQ2RTNPQzhWTlpQNm9jdUpPS3BJdnNmclRzOWppM0w4aS8vWE1tSU9oYUdzOVE3MUo2NUZwWGpGZXZjOXVTQVZGNEZ6cElNRXNHa3ZkVmVOMWpKVmlOcGhkL2JBeU8xR0NvSUNnK3d5WitDajlFPS0tdmxJQnhxY1g4WlRhaUIwbFlYUnRxdz09--d34bdffbe4080be483b3545c12b5fb4980c3199b");
+                var nocontrols_translations = "";
+
+                $('#season').change(function() {
+                    var season = $('#season').val();
+
+                    var url = 'http://s1.yallaneliera.com/serial/2215798cb233558c34806f3de60527ca/iframe' + '?season=' + season + '&episode=1&nocontrols_translations=' + nocontrols_translations + '&ref=' + referer;
+
+
+                    window.location.href = url;
+                });
+
+                $('#episode').change(function() {
+                    var season = $('#season').val();
+                    var episode = $('#episode').val();
+
+                    if (!season) {
+                        season = 3;
+                    }
+
+                    var nocontrols_seasons = "";
+
+                    var url = 'http://s1.yallaneliera.com/serial/2215798cb233558c34806f3de60527ca/iframe' + '?season=' + season + '&episode=' + episode + '&nocontrols_translations=' + nocontrols_translations + '&ref=' + referer + '&nocontrols_seasons=' + nocontrols_seasons;
+
+
+                    window.location.href = url;
+                });
+
+                $('#translator').change(function() {
+                    var translator_serial_token = $('#translator').val();
+
+                    var url = '/serial/' + translator_serial_token + '/iframe?ref=' + referer + '&nocontrols_translations=' + nocontrols_translations;
+
+
+                    window.location.href = url;
+                });
+            });
+        </script>
+
+        <span id="iframe_code_button" style="position: absolute; top: 10px; right: 15px; color: #666666; border-bottom: 1px dotted #666; font-family: Arial; font-size: 12px; z-index: 99995; cursor: pointer; padding-bottom: 1px;">Код</span>
+
+
+
+        <div id="efbeeccdbdc">
+            <div style="color: #bb3333; margin-top: 15px; font-size: 15px;"><b>Функционал плеера ограничен!</b></div>
+            <div style="padding: 15px;">Добавьте фильтр для Adblock или Adblock Plus, чтобы просматривать видео в&nbsp;HD/FullHD качестве на максимальной скорости. После этого <b>обновите страницу</b>.</div>
+
+            <center>
+                <a href="abp:subscribe?location=http://s1.yallaneliera.com/filters/RuAdList+SafeVideo.txt&amp;title=RuAdList+SafeVideo" style="background: green; width: 200px; padding: 10px; border-radius: 5px; font-size: 15px; color: white; text-shadow: 1px 1px 0px #555; box-shadow: 2px 2px 3px #555; cursor: pointer; text-decoration: none; margin-right: 5px;">+ Добавить фильтр</a>
+
+                <a href="" id="adblock_reload_page" style="background: #777777; width: 100px; padding: 10px; border-radius: 5px; font-size: 15px; color: white; text-shadow: 1px 1px 0px #555; box-shadow: 2px 2px 3px #555; cursor: pointer; text-decoration: none;">Обновить страницу</a>
+            </center>
+
+            <br />
+
+            <div>
+                Для Adblock Plus:
+
+                <a href="abp:subscribe?location=http://s1.yallaneliera.com/filters/RuAdList+SafeVideo.txt&amp;title=RuAdList+SafeVideo">
+                    <img style="cursor: pointer" width="550px" src="http://185.38.12.44/static/adblock_plus.png" alt="Adblock plus" />
+                </a>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content'),
+                    'X-Condition-Safe': 'Normal'
+                }
+            });
+        </script>
+
+        <div id="iframe_code_form" style="position: absolute; top: 33px; right: 15px; z-index: 9999;  display: none; color: white; font-family: Arial; font-size: 12px;">
+            Код:<br />
+            <textarea id="iframe_code_textarea" style="width: 330px; height: 55px; border-radius: 5px; border: 0px; outline: none; font-size: 10px;"></textarea>
+            <br /><br />
+            Ссылка:<br />
+            <textarea id="iframe_link_textarea" style="width: 330px; height: 25px; border-radius: 5px; border: 0px; outline: none; font-size: 10px;"></textarea>
+
+        </div>
+
+        <div id="MToverroll" style="display: inline-block; position: absolute; top: 40px; right: 0px; bottom: 0px; left: 0px;">
+            <div id="player"></div>
+        </div>
+
+        <script type="text/javascript">
+            var kodik_play = document.getElementById('player');
+
+            kodik_play.onclick = function() {
+                window.parent.postMessage('player_started', '*');
+                kodik_play.style.background = 'black';
+            };
+        </script>
+
+
+
+
+
+
+
+
+
+
+
+
+        <script type="text/javascript">insertVideo('The.Flash.S03E13.1080p.rus.LostFilm.TV_.mkv', 'player');</script>
+
+        <script type="text/javascript" id="advlauncher"></script>
+
+        <div style='display: none; width: 100%; height: 100%;' id='launcher_block'><div id="launcher"></div></div>
+
+        <!--noindex-->
+        <div id="amcu"></div>
+        <!--/noindex-->
+
+        <!--noindex--><div id="ambn28384"></div><!--/noindex-->
+        <!--noindex--><div id="ambn505541"></div><!--/noindex-->
+        <!--noindex--><div id="ambn717004"></div><!--/noindex-->
+        <!--noindex--><div id="amvb128745523"></div><!--/noindex-->
+        <!--noindex--><div id="amvb345583174"></div><!--/noindex-->
+
+
+
+        <script type="text/javascript">
+            eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('n 1s=1B(\'1E\'+\'t\'+\'T\'+\'1H\'+\'1K\'+\'t\');1s(h(){n a=1o[\'1P\'+\'L\'+\'2x\'+\'L\'+\'2C\'];a[\'15\'+\'L\'+\'1i\']=a[\'15\'+\'L\'+\'1i\'].2M(\'c\',\'с\')},2F);(h(e){n f=h(a){4.9={U:o,N:o,O:2t,S:5,19:\'2s 2r 2q V-11 2i 2h 2d V-24 V-11-21\',18:\'1Y: 1a !y; 1W: 1a !y; 1V: 1U !y; 1T: -1S !y; 1R: -1Q !y;\',k:o};4.6={1O:\'3.2.1\',g:m,C:o,r:m,s:0,q:{D:[],x:[]}};8(a!==v){4.P(a)}n b=4;n c=h(){Q(h(){8(b.9.U===7){8(b.9.k===7){b.l(\'1h->1A\',\'A p 1z G 1y\')}8(b.6.g===m){b.z()}Q(h(){b.p()},1)}},1)};8(e.1p!==v){e.1p(\'1x\',c,o)}1r{e.1u(\'1h\',c)}};f.j.9=m;f.j.6=m;f.j.27=m;f.j.l=h(a,b){1v.1w(\'[1q][\'+a+\'] \'+b)};f.j.P=h(a,b){8(b!==v){n c=a;a={};a[c]=b}1n(n d W a){4.9[d]=a[d];8(4.9.k===7){4.l(\'P\',\'1g 1C "\'+d+\'" 1D w 1F 1G "\'+a[d]+\'"\')}}u 4};f.j.z=h(){n a=M.1I(\'1J\');a.12(\'1L\',4.9.19);a.12(\'1M\',4.9.18);4.6.g=e.M.X.1N(a);4.6.g.Z;4.6.g.Y;4.6.g.1m;4.6.g.1l;4.6.g.1k;4.6.g.1j;4.6.g.1f;8(4.9.k===7){4.l(\'z\',\'1e F E 1X\')}};f.j.K=h(){e.M.X.1Z(4.6.g);4.6.g=m;8(4.9.k===7){4.l(\'K\',\'1e F E 20\')}};f.j.p=h(a){8(a===v){a=7}8(4.9.k===7){4.l(\'p\',\'17 22 w 23 \'+(a===7?\'16 a\':\'25\')+\' r\')}8(4.6.C===7){8(4.9.k===7){4.l(\'p\',\'A p w 26 1t 28 G 29 2a 2b\')}u o}4.6.C=7;8(4.6.g===m){4.z()}n b=4;4.6.s=0;8(a===7){4.6.r=2c(h(){b.J(a)},4.9.O)}Q(h(){b.J(a)},1);8(4.9.k===7){4.l(\'p\',\'A p G W 2e ...\')}u 7};f.j.J=h(a){n b=o;8(4.6.g===m){4.z()}8(e.M.X.2f(\'2g\')!==m||4.6.g.Z===m||4.6.g.Y==0||4.6.g.1m==0||4.6.g.1l==0||4.6.g.1k==0||4.6.g.1j==0||4.6.g.1f==0){b=7}8(e.14!==v){n c=e.14(4.6.g,m);8(c&&(c.13(\'2j\')==\'2k\'||c.13(\'2l\')==\'2m\')){b=7}}8(4.9.k===7){4.l(\'J\',\'A p (\'+(4.6.s+1)+\'/\'+4.9.S+\' ~\'+(1+4.6.s*4.9.O)+\'2n) w 2o 2p 1d G \'+(b===7?\'1c\':\'1b\'))}8(a===7){4.6.s++;8(4.6.s>=4.9.S){4.I()}}8(b===7){4.I();4.K();4.B(7);8(a===7){4.6.C=o}}1r 8(4.6.r===m||a===o){4.K();4.B(o);8(a===7){4.6.C=o}}};f.j.I=h(a){2u(4.6.r);4.6.r=m;4.6.s=0;8(4.9.k===7){4.l(\'I\',\'A r F E 2v\')}};f.j.B=h(a){8(4.9.k===7){4.l(\'B\',\'17 q 16 a \'+(a===7?\'1c\':\'1b\')+\' 1d w 2w\')}n b=4.6.q[(a===7?\'D\':\'x\')];1n(n i W b){8(4.9.k===7){4.l(\'B\',\'2y h \'+(2z(i)+1)+\'/\'+b.2A)}8(b.2B(i)){b[i]()}}8(4.9.N===7){4.R()}u 4};f.j.R=h(){4.6.q.D=[];4.6.q.x=[];8(4.9.k===7){4.l(\'R\',\'1g q 2D F E 2E\')}};f.j.H=h(a,b){4.6.q[(a===7?\'D\':\'x\')].2G(b);8(4.9.k===7){4.l(\'H\',\'A 2H 2I q "\'+(a===7?\'D\':\'x\')+\'" w 2J\')}u 4};f.j.2K=h(a){u 4.H(7,a)};f.j.2L=h(a){u 4.H(o,a)};e.1q=f;8(e.10===v){e.10=2N f({U:7,N:7})}})(1o);',62,174,'||||this||_var|true|if|_options|||||||bait|function||prototype|debug|_log|null|var|false|check|event|loop|loopNumber||return|undefined|was|notDetected|important|_creatBait||emitEvent|checking|detected|been|has|is|on|_stopLoop|_checkBait|_destroyBait|_|document|resetOnEnd|loopCheckTime|setOption|setTimeout|clearEvent|loopMaxNumber||checkOnLoad|text|in|body|offsetHeight|offsetParent|fuckAdBlock|ad|setAttribute|getPropertyValue|getComputedStyle|mw|with|An|baitStyle|baitClass|1px|negative|positive|detection|Bait|clientWidth|The|onload|key|clientHeight|offsetWidth|offsetTop|offsetLeft|for|window|addEventListener|FuckAdBlock|else|c5|because|attachEvent|console|log|load|launched|loading|eventCallback|eval|option|he|se|assigned|to|ime|createElement|div|ou|class|style|appendChild|version|banners|1000px|top|10000px|left|absolute|position|height|created|width|removeChild|removed|links|audit|requested|ads|without|canceled|_bait|there|already|an|ongoing|setInterval|text_ads|progress|getAttribute|abp|text_ad|textAd|display|none|visibility|hidden|ms|conducted|and|pub_728x90|pub_300x250m|pub_300x250|50|clearInterval|stopped|called|script|Call|parseInt|length|hasOwnProperty|clickunder|list|cleared|300|push|type|of|added|onDetected|onNotDetected|replace|new'.split('|'),0,{}))
+        </script>
+
+    </body>
+</html>
