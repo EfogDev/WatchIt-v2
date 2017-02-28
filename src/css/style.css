@@ -246,6 +246,16 @@ html, body {
     background: #eee;
 }
 
+.serial-updated {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 10px;
+    height: 10px;
+    background: red;
+    border-radius: 20px;
+}
+
 .updated {
     position: absolute;
     right: 10px;

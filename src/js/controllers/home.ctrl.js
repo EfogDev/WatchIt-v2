@@ -105,6 +105,12 @@ angular.module('watchit')
             return seasons.every(e => e.watched);
         };
 
+        $scope.isSerialUpdated = serial => {
+            let found = Storage.findSerial(serial.link);
+
+            return found.seasons.some(s => s.updated);
+        };
+
         $scope.back = () => {
             if ($scope.serial.season !== null) {
                 $scope.serial.season = null;

@@ -61,6 +61,7 @@
 
             <div class="list-container" ng-if="!search.loading">
                 <div class="serial" ng-click="openSerial(serial)" ng-repeat="serial in serials track by $index" ng-if="!search.text">
+                    <div class="serial-updated" ng-if="isSerialUpdated(serial)"></div>
                     <serial-item data="serial"></serial-item>
                 </div>
 
