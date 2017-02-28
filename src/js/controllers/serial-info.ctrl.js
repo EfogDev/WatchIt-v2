@@ -14,6 +14,10 @@ angular.module('watchit')
         $scope.add = () => {
             Storage.addSerial(link, $stateParams.name, $scope.data.voice);
             $scope.serialExists = true;
+
+            API.loadSeasons(link).then(seasons => {
+                Storage.updateSeasons(link, seasons);
+            });
         };
 
         $scope.remove = () => {

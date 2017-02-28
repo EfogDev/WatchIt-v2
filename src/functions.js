@@ -13,7 +13,7 @@ const jsdom = require('jsdom');
             request.abort();
 
         request = net.request({
-            url: 'http://zfilm-hd.net/engine/ajax/search.php',
+            url: 'http://zfilm-hd.org/engine/ajax/search.php',
             method: 'POST'
         });
 
@@ -22,7 +22,9 @@ const jsdom = require('jsdom');
         request.write(`query=${encodeURI(name)}`);
         request.end();
 
-        request.on('response', response => {
+        console.log(`query=${encodeURI(name)}`);
+
+        request.on('response', response => { console.log(response);
             let data = '';
 
             response.on('data', chunk => {

@@ -82,7 +82,7 @@ angular.module('watchit')
 
                 //poster image
                 let image = el.querySelector('img[itemprop]');
-                data.image = image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : null;
+                data.image = image ? `http://zfilm-hd.org/${image.getAttribute('src')}` : null;
 
                 //voice
                 try {
@@ -115,7 +115,7 @@ angular.module('watchit')
                 let el = DOM(response.data);
                 let image = el.querySelector('img[itemprop]');
 
-                return image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : '';
+                return image ? `http://zfilm-hd.org/${image.getAttribute('src')}` : '';
             });
         };
 

@@ -39,11 +39,11 @@ angular.module('watchit')
             }
         });
 
-        $scope.goToSerialInfo = (serial) => {
+        $scope.goToSerialInfo = serial => {
             $state.go('serial-info', {link: serial.link, name: serial.name});
         };
 
-        $scope.openSerial = (serial) => {
+        $scope.openSerial = serial => {
             $state.go('serial-info', {link: serial.link, name: serial.name});
 
             $scope.options.loading = true;
