@@ -1,6 +1,10 @@
 angular.module('watchit', ['ui.router', 'ngStorage'])
 
     .config(($stateProvider, $urlRouterProvider) => {
+        Array.prototype.last = function () {
+            return this[this.length - 1];
+        };
+
         $stateProvider
             .state({
                 name: 'home',

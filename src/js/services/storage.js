@@ -1,6 +1,6 @@
 angular.module('watchit')
 
-    .service('Storage', function ($localStorage) {
+    .service('Storage', function ($localStorage, API) {
         let getSerial = (serialLink) => {
             let serial = _.find(serials, s => s.link === serialLink);
 
@@ -35,6 +35,23 @@ angular.module('watchit')
 
         this.removeSerial = (serialLink) => {
             serials.splice(_.findIndex(serials, s => s.link === serialLink), 1);
+        };
+
+        this.updateSerials = () => {
+            serials.forEach(serial => {
+                serial.isUpdating = true;
+
+                API.loadSeasons(serial.link).then(seasons => {
+                    this.updateSeasons(serial.link, seasons);
+
+                    let lastSeason = serial.seasons.last();
+                    API.loadEpisodes(serial.link, lastSeason.id).then(episodes => {
+                        this.updateEpisodes(serial.link, lastSeason.id, episodes);
+
+                        serial.isUpdating = false;
+                    });
+                });
+            });
         };
 
         this.updateSeasons = (serialLink, seasons) => {
@@ -84,4 +101,5 @@ angular.module('watchit')
         };
 
         let serials = this.load();
+        //this.updateSerials();
     });

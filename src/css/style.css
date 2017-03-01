@@ -40,6 +40,7 @@ html, body {
     border-right: 1px solid #e3e3e3;
     height: 100vh;
     overflow-y: auto;
+    overflow-x: hidden;
     width: 300px;
     min-width: 300px;
     position: fixed;
@@ -99,6 +100,7 @@ html, body {
 .serial-item {
     display: flex;
     flex-direction: row;
+    padding-right: 20px;
 }
 
 .poster {
@@ -283,14 +285,12 @@ html, body {
 }
 
 .updating {
-    position: fixed;
-    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
     display: inline-block;
-    bottom: 0;
-    width: inherit;
     padding: 10px;
     text-align: center;
-    background: rgba(100, 100, 100, 0.8);
 }
 
 .updating .cssload-loader {

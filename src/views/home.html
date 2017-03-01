@@ -61,7 +61,17 @@
 
             <div class="list-container" ng-if="!search.loading">
                 <div class="serial" ng-click="openSerial(serial)" ng-repeat="serial in serials track by $index" ng-if="!search.text">
-                    <div class="serial-updated" ng-if="isSerialUpdated(serial)"></div>
+                    <div class="serial-updated" ng-if="isSerialUpdated(serial) && !isSerialUpdating(serial)"></div>
+
+
+                    <div class="updating" ng-if="isSerialUpdating(serial)">
+                        <div class="cssload-loader">
+                            <div class="cssload-inner cssload-one"></div>
+                            <div class="cssload-inner cssload-two"></div>
+                            <div class="cssload-inner cssload-three"></div>
+                        </div>
+                    </div>
+
                     <serial-item data="serial"></serial-item>
                 </div>
 
@@ -69,16 +79,6 @@
                     <serial-item data="serial"></serial-item>
                 </div>
             </div>
-        </div>
-
-        <div class="updating">
-            <div class="cssload-loader">
-                <div class="cssload-inner cssload-one"></div>
-                <div class="cssload-inner cssload-two"></div>
-                <div class="cssload-inner cssload-three"></div>
-            </div>
-
-            Информация о сериалах обновляется...
         </div>
     </div>
 

@@ -22,9 +22,7 @@ const jsdom = require('jsdom');
         request.write(`query=${encodeURI(name)}`);
         request.end();
 
-        console.log(`query=${encodeURI(name)}`);
-
-        request.on('response', response => { console.log(response);
+        request.on('response', response => {
             let data = '';
 
             response.on('data', chunk => {
@@ -108,7 +106,7 @@ const jsdom = require('jsdom');
         request = http.get({
             port: 80,
             host: parsedUrl.hostname,
-            path: parsedUrl.pathname + `?season=${options.seasonId + 1}&episode=1`,
+            path: parsedUrl.pathname + `?season=${options.seasonId + 1}`,
             method: 'GET',
             headers
         }, response => {
@@ -154,14 +152,19 @@ const jsdom = require('jsdom');
 
         let injector = `
             new Promise(function (resolve, reject) {
-                resolve(document.body.innerHTML.match(/video_token: '(.*?)',/im)[1]);
+                var result = {
+                    host: document.body.innerHTML.match(/http:\\/\\/(.+?)\\/video/im)[1],
+                    token: document.body.innerHTML.match(/video_token: '(.*?)',/im)[1]
+                };
+            
+                resolve(result);
                 showVideo();
             })
         `;
 
         tempWindow.webContents.on('did-finish-load', () => {
-            tempWindow.webContents.executeJavaScript(injector, false, token => {
-                let url = `http://s1.yallaneliera.com/video/${token}/index.m3u8?arg=5`;
+            tempWindow.webContents.executeJavaScript(injector, false, result => {
+                let url = `http://${result.host}/video/${result.token}/index.m3u8?arg=5`;
 
                 request = net.request({
                     method: 'GET',
@@ -197,7 +200,6 @@ const jsdom = require('jsdom');
             callback({ cancel: false, requestHeaders: details.requestHeaders });
         });
 
-        tempWindow.webContents.openDevTools();
         tempWindow.loadURL(options.url + `?season=${++options.season}&episode=${++options.episode}`, {extraHeaders: `Referer: ${options.link}\n`});
     });
 })();

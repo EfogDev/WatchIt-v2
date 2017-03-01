@@ -111,6 +111,10 @@ angular.module('watchit')
             return found.seasons.some(s => s.updated);
         };
 
+        $scope.isSerialUpdating = serial => {
+            return serial.isUpdating;
+        };
+
         $scope.back = () => {
             if ($scope.serial.season !== null) {
                 $scope.serial.season = null;
@@ -120,4 +124,6 @@ angular.module('watchit')
                 $scope.search.hidden = false;
             }
         };
+
+        Storage.updateSerials();
     });
