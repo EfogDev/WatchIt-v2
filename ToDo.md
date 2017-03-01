@@ -1,0 +1,13 @@
+ToDo
+----
+ - Settings
+  - Default quality
+  - Auto-update
+ - Refactoring
+  - Split functions by files
+ - Functionality
+  - Episode progress saving
+  - Rate serials
+  - Search: merge voices and make a picker
+ - Video player
+  - Double-click fullscreen

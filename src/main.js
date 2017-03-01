@@ -11,8 +11,9 @@ function createWindow() {
     mainWindow = new BrowserWindow({
         'width': 960,
         'height': 600,
-        'minWidth': (process.env.DEBUG) ? 1366 : 960,
+        'minWidth': 1366,
         'minHeight': 600,
+        'show': false
     });
 
     mainWindow.loadURL(url.format({
@@ -20,6 +21,10 @@ function createWindow() {
         protocol: 'file:',
         slashes: true
     }));
+
+    mainWindow.once('ready-to-show', () => {
+        mainWindow.show();
+    });
 
     mainWindow.on('closed', function () {
         mainWindow = null

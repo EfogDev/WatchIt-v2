@@ -28,6 +28,13 @@ angular.module('watchit', ['ui.router', 'ngStorage'])
                 parent: 'home',
                 templateUrl: 'views/episode.html',
                 controller: 'EpisodeCtrl'
+            })
+            .state({
+                name: 'settings',
+                url: '/settings',
+                parent: 'home',
+                templateUrl: 'views/settings.html',
+                controller: 'SettingsCtrl'
             });
 
         $urlRouterProvider.otherwise('/');

@@ -2,7 +2,7 @@
     <div class="left-panel">
         <div class="search" ng-hide="search.hidden">
             <span class="search-icon fa fa-search"></span>
-            <input type="text" ng-model="search.text" />
+            <input placeholder="Найти сериал" type="text" ng-model="search.text" />
             <span class="search-icon fa fa-times pointer" ng-click="search.text = ''"></span>
         </div>
 
@@ -69,6 +69,16 @@
                     <serial-item data="serial"></serial-item>
                 </div>
             </div>
+        </div>
+
+        <div class="updating">
+            <div class="cssload-loader">
+                <div class="cssload-inner cssload-one"></div>
+                <div class="cssload-inner cssload-two"></div>
+                <div class="cssload-inner cssload-three"></div>
+            </div>
+
+            Информация о сериалах обновляется...
         </div>
     </div>
 
