@@ -1,77 +1,47 @@
 angular.module('watchit')
 
-    .service('API', function ($http, DOM) {
+    .service('API', function ($http, DOM, Server) {
         const {ipcRenderer} = require('electron');
 
         this.loadSeasons = (link) => {
-            return new Promise((resolve, reject) => {
-                $http.get(link).then(response => {
-                    let el = DOM(response.data);
-                    let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
+            return $http.get(link).then(response => {
+                let el = DOM(response.data);
+                let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
 
-                    if (!frame)
-                        throw new Error('Ошибка. Возможно, это не сериал?');
+                if (!frame)
+                    throw new Error('Ошибка. Возможно, это не сериал?');
 
-                    return frame.getAttribute('src');
-                }).then(url => {
-                    ipcRenderer.send('seasons', {url, link});
-
-                    return new Promise(resolve => {
-                        ipcRenderer.once('seasons', (event, data) => {
-                            resolve(data);
-                        });
-                    });
-                }).then(data => {
-                    resolve(data);
-                });
+                return frame.getAttribute('src');
+            }).then(url => {
+                return Server.send('seasons', {url, link});
             });
         };
 
         this.loadEpisodes = (link, seasonId) => {
-            return new Promise((resolve, reject) => {
-                $http.get(link).then(response => {
-                    let el = DOM(response.data);
-                    let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
+            return $http.get(link).then(response => {
+                let el = DOM(response.data);
+                let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
 
-                    if (!frame)
-                        throw new Error('Ошибка. Возможно, это не сериал?');
+                if (!frame)
+                    throw new Error('Ошибка. Возможно, это не сериал?');
 
-                    return frame.getAttribute('src');
-                }).then(url => {
-                    ipcRenderer.send('episodes', {url, link, seasonId});
-
-                    return new Promise(resolve => {
-                        ipcRenderer.once('episodes', (event, data) => {
-                            resolve(data);
-                        });
-                    });
-                }).then(data => {
-                    resolve(data);
-                });
+                return frame.getAttribute('src');
+            }).then(url => {
+               return Server.send('episodes', {url, link, seasonId});
             });
         };
 
         this.getVideo = (link, season, episode) => {
-            return new Promise((resolve, reject) => {
-                $http.get(link).then(response => {
-                    let el = DOM(response.data);
-                    let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
+            return $http.get(link).then(response => {
+                let el = DOM(response.data);
+                let frame = el.querySelector('iframe[allowfullscreen][src*="/serial/"]');
 
-                    if (!frame)
-                        throw new Error('Неизвестная ошибка. Попробуйте позже.');
+                if (!frame)
+                    throw new Error('Неизвестная ошибка. Попробуйте позже.');
 
-                    return frame.getAttribute('src');
-                }).then(url => {
-                    ipcRenderer.send('video', {url, link, season, episode});
-
-                    return new Promise(resolve => {
-                        ipcRenderer.once('video', (event, data) => {
-                            resolve(data);
-                        });
-                    });
-                }).then(data => {
-                    resolve(data);
-                });
+                return frame.getAttribute('src');
+            }).then(url => {
+                return Server.send('video', {url, link, season, episode});
             });
         };
 
@@ -82,7 +52,7 @@ angular.module('watchit')
 
                 //poster image
                 let image = el.querySelector('img[itemprop]');
-                data.image = image ? `http://zfilm-hd.org/${image.getAttribute('src')}` : null;
+                data.image = image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : null;
 
                 //voice
                 try {
@@ -115,43 +85,39 @@ angular.module('watchit')
                 let el = DOM(response.data);
                 let image = el.querySelector('img[itemprop]');
 
-                return image ? `http://zfilm-hd.org/${image.getAttribute('src')}` : '';
+                return image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : '';
             });
         };
 
         this.search = (name) => {
-            ipcRenderer.send('search', name);
+            return Server.send('search', name).then(found => {
+                if (typeof found !== 'string')
+                    return;
 
-            return new Promise((resolve, reject) => {
-                ipcRenderer.once('found', (event, found) => {
-                    if (typeof found !== 'string')
-                        reject();
+                let serials = [];
 
-                    let serials = [];
+                let temp = document.createElement('div');
+                temp.innerHTML = found;
 
-                    let temp = document.createElement('div');
-                    temp.innerHTML = found;
+                let items = temp.querySelectorAll('a');
+                items.forEach(item => {
+                    if (!item.childNodes.length)
+                        return;
 
-                    let items = temp.querySelectorAll('a');
-                    items.forEach(item => {
-                        if (!item.childNodes.length)
-                            return;
+                    let link = item.href;
+                    let info = item.childNodes[0].childNodes;
 
-                        let link = item.href;
-                        let info = item.childNodes[0].childNodes;
+                    if (info.length < 2)
+                        return;
 
-                        if (info.length < 2)
-                            return;
-
-                        serials.push({
-                            name: info[0].textContent,
-                            info: info[1].textContent.replace(/[(|)]/gim, '').trim(),
-                            link
-                        });
+                    serials.push({
+                        name: info[0].textContent,
+                        info: info[1].textContent.replace(/[(|)]/gim, '').trim(),
+                        link
                     });
-
-                    resolve(serials);
                 });
+
+                return serials;
             });
         };
     });

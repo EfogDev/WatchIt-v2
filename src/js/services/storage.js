@@ -69,7 +69,7 @@ angular.module('watchit')
         };
 
         this.updateEpisodes = (serialLink, seasonId, episodes) => {
-            let season = getSerial(serialLink).seasons.filter(s => s.id == seasonId)[0];
+            let season = getSerial(serialLink).seasons.filter(s => s.id === seasonId)[0];
 
             if (!season)
                 return null;
@@ -101,5 +101,4 @@ angular.module('watchit')
         };
 
         let serials = this.load();
-        //this.updateSerials();
     });

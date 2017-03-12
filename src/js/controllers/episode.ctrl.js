@@ -15,34 +15,30 @@ angular.module('watchit')
             $scope.sources = sources;
             $scope.currentSource = $sce.trustAsResourceUrl(sources['360']);
 
-            $scope.apply();
+            $scope.update();
         });
 
-        $scope.apply = () => {
-            $scope.$apply(() => {
-                setTimeout(() => {
-                    if (videojs.players.video)
-                        videojs.players.video.dispose();
+        $scope.update = () => {
+            setTimeout(() => {
+                if (videojs.players.video)
+                    videojs.players.video.dispose();
 
-                    var player = videojs('video',  {plugins: {
-                        videoJsResolutionSwitcher: {
-                            default: 'low',
-                            dynamicLabel: true
-                        }
-                    }}, () => {
-                        player.updateSrc(Object.keys($scope.sources).map(quality => {
-                            console.info(quality, $scope.sources[quality]);
+                let player = videojs('video',  {plugins: {
+                    videoJsResolutionSwitcher: {
+                        default: 'low',
+                        dynamicLabel: true
+                    }
+                }}, () => {
+                    player.updateSrc(Object.keys($scope.sources).map(quality => {
+                        return {
+                            src: $scope.sources[quality],
+                            type: 'application/x-mpegURL',
+                            label: quality,
+                            res: parseInt(quality)
+                        };
+                    }));
 
-                            return {
-                                src: $scope.sources[quality],
-                                type: 'application/x-mpegURL',
-                                label: quality,
-                                res: parseInt(quality)
-                            };
-                        }));
-
-                        player.play();
-                    });
+                    player.play();
                 });
             });
         };

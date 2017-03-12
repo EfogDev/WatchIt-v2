@@ -57,13 +57,12 @@ angular.module('watchit')
                 $scope.serial.data = Storage.findSerial(serial.link);
 
                 $scope.serial.data.updated = false;
-
-                $scope.$apply();
             });
         };
 
         $scope.openSeason = season => {
             $scope.options.loading = true;
+            $scope.serial.season = season.id;
 
             API.loadEpisodes($scope.serial.data.link, season.id).then(episodes => {
                 Storage.updateEpisodes($scope.serial.data.link, season.id, episodes);
@@ -71,10 +70,7 @@ angular.module('watchit')
                 season.updated = false;
 
                 $scope.serial.data = Storage.findSerial($scope.serial.data.link);
-                $scope.serial.season = season.id;
                 $scope.options.loading = false;
-
-                $scope.$apply();
             });
         };
 
@@ -89,7 +85,7 @@ angular.module('watchit')
             if (!$scope.serial.data)
                 return false;
 
-            let season = $scope.serial.data.seasons.filter(s => s.id == seasonId)[0];
+            let season = $scope.serial.data.seasons.filter(s => s.id === seasonId)[0];
 
             if (season) {
                 return season.episodes;
@@ -117,6 +113,7 @@ angular.module('watchit')
 
         $scope.back = () => {
             if ($scope.serial.season !== null) {
+                $scope.options.loading = false;
                 $scope.serial.season = null;
             } else {
                 $scope.serial.data = null;

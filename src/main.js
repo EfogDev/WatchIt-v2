@@ -38,7 +38,7 @@ function createWindow() {
 
 app.on('ready', () => {
     createWindow();
-    require('./functions');
+    require('./server/functions');
 });
 
 app.on('window-all-closed', function () {
