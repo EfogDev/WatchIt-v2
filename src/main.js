@@ -1,7 +1,7 @@
 const electron = require('electron');
 const {app} = electron;
 const BrowserWindow = electron.BrowserWindow;
-
+const getDomain = require('./server/functions/domain');
 const path = require('path');
 const url = require('url');
 
@@ -37,8 +37,11 @@ function createWindow() {
 }
 
 app.on('ready', () => {
-    createWindow();
-    require('./server/functions');
+    getDomain().then(() => {
+        require('./server/functions');
+
+        createWindow();
+    });
 });
 
 app.on('window-all-closed', function () {

@@ -63,7 +63,6 @@
                 <div class="serial" ng-click="openSerial(serial)" ng-repeat="serial in serials track by $index" ng-if="!search.text">
                     <div class="serial-updated" ng-if="isSerialUpdated(serial) && !isSerialUpdating(serial)"></div>
 
-
                     <div class="updating" ng-if="isSerialUpdating(serial)">
                         <div class="cssload-loader">
                             <div class="cssload-inner cssload-one"></div>

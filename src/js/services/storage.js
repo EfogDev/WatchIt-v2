@@ -10,6 +10,30 @@ angular.module('watchit')
             return serial;
         };
 
+        this.setDomain = (domain) => {
+            let processObject = (object) => {
+                for (let key in object) {
+                    if (!object.hasOwnProperty(key))
+                        continue;
+
+                    let value = object[key];
+
+                    if (typeof value === 'string') {
+                        object[key] = value.replace(/http:\/\/(.+?)\//im, `http://${domain}/`);
+                        continue;
+                    }
+
+                    if (typeof value === 'object') {
+                        object[key] = processObject(value);
+                    }
+                }
+
+                return object;
+            };
+
+            serials = serials.map(processObject);
+        };
+
         this.findSerial = (serialLink) => {
             return _.find(serials, s => s.link === serialLink);
         };

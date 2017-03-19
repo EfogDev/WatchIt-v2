@@ -7,8 +7,14 @@ angular.module('watchit', ['ui.router', 'ngStorage'])
 
         $stateProvider
             .state({
-                name: 'home',
+                name: 'loading',
                 url: '/',
+                templateUrl: 'views/loading.html',
+                controller: 'LoadingCtrl'
+            })
+            .state({
+                name: 'home',
+                url: '/home',
                 templateUrl: 'views/home.html',
                 controller: 'HomeCtrl'
             })

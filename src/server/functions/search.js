@@ -1,16 +1,16 @@
 const http = require('http');
 const jsdom = require('jsdom');
 const {net} = require('electron');
+const domain = require('./domain')();
 
-let request;
-
+let request = null;
 let search = (name, UA) => {
     return new Promise((resolve, reject) => {
         if (request)
             request.abort();
 
         request = net.request({
-            url: 'http://zfilm-hd.net/engine/ajax/search.php',
+            url: `http://${domain}/engine/ajax/search.php`,
             method: 'POST'
         });
 

@@ -1,6 +1,5 @@
 const http = require('http');
 const jsdom = require('jsdom');
-const {net} = require('electron');
 
 let getSeasons = (options, UA) => {
     return new Promise((resolve, reject) => {

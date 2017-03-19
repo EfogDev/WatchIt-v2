@@ -6,6 +6,7 @@ const log = require('./functions/log');
 const client = require('./client');
 
 const debugState = require('./functions/debug');
+const domain = require('./functions/domain')();
 const search = require('./functions/search');
 const getSeasons = require('./functions/seasons');
 const getEpisodes = require('./functions/episodes');
@@ -13,6 +14,10 @@ const getVideoLinks = require('./functions/video');
 
 client.on('debug', () => {
     return debugState;
+});
+
+client.on('domain', () => {
+    return domain;
 });
 
 client.on('search', name => {

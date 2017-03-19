@@ -1,7 +1,7 @@
 angular.module('watchit')
 
     .service('Server', function () {
-         this.send = (eventName, options) => {
+         this.send = (eventName, options = {}) => {
              const {ipcRenderer} = require('electron');
              const eventId = ipcRenderer.sendSync(eventName, options);
 

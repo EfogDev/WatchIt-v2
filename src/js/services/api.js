@@ -2,6 +2,13 @@ angular.module('watchit')
 
     .service('API', function ($http, DOM, Server) {
         const {ipcRenderer} = require('electron');
+        let domain = '';
+
+        this.getDomain = () => {
+            return Server.send('domain');
+        };
+
+        this.setDomain = data => domain = data;
 
         this.loadSeasons = (link) => {
             return $http.get(link).then(response => {
@@ -52,7 +59,7 @@ angular.module('watchit')
 
                 //poster image
                 let image = el.querySelector('img[itemprop]');
-                data.image = image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : null;
+                data.image = image ? `http://${domain}/${image.getAttribute('src')}` : null;
 
                 //voice
                 try {
@@ -85,7 +92,7 @@ angular.module('watchit')
                 let el = DOM(response.data);
                 let image = el.querySelector('img[itemprop]');
 
-                return image ? `http://zfilm-hd.net/${image.getAttribute('src')}` : '';
+                return image ? `http://${domain}/${image.getAttribute('src')}` : '';
             });
         };
 
