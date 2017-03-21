@@ -24,5 +24,8 @@
     "video.js": "^5.18.0",
     "videojs-contrib-hls-dist": "^3.5.4",
     "vjs-resolution-switcher": "videojs-resolution-switcher#^0.4.2"
+  },
+  "resolutions": {
+    "video.js": "5.19.0"
   }
 }
